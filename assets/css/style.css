@@ -3829,7 +3829,7 @@ ul {
 .learning_part {
     position: relative;
     z-index: 99;
-    padding: 189px 0px 210px;
+    padding: 150px 0px 110px;
 }
 
 @media (max-width: 576px) {
@@ -4493,7 +4493,7 @@ ul {
 /* line 49, E:/172 Etrain Education/172_Etrain_Education_html/sass/_member_counter.scss */
 
 .member_counter .single_member_counter span {
-    font-size: 60px;
+    font-size: 50px;
     font-weight: 700;
     color: #fff;
     font-style: "Poppins", sans-serif;
@@ -4503,7 +4503,7 @@ ul {
     /* line 49, E:/172 Etrain Education/172_Etrain_Education_html/sass/_member_counter.scss */
     .member_counter .single_member_counter span {
         line-height: 67px;
-        font-size: 40px;
+        font-size: 50px;
     }
 }
 
@@ -4536,7 +4536,7 @@ ul {
 
 .member_counter .single_member_counter h4 {
     color: #fff;
-    font-size: 24px;
+    font-size: 22px;
     font-size: 600;
     margin-top: 28px;
     text-transform: capitalize;

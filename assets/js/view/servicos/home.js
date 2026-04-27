@@ -34,63 +34,63 @@ export default {
             cursos: [{
                 id: 1,
                 categoria: 'Engenharia Civil',
-                titulo: 'Arquitetura Web 10X',
+                titulo: 'Medições e Orçamentos - MO',
                 preco: '49.900',
                 descricao: 'Descrição do curso...',
                 imagem: 'https://picsum.photos/400/200?random=1'
             }, {
                 id: 2,
                 categoria: 'Engenharia Civil',
-                titulo: 'Excel Avançado',
+                titulo: 'Fiscalização de Obras - FO',
                 preco: '32.900',
                 descricao: 'Descrição do curso...',
                 imagem: 'https://picsum.photos/400/200?random=2'
             }, {
                 id: 3,
                 categoria: "Arquitetura",
-                titulo: 'Python Completo',
+                titulo: 'AutoCAD 2D',
                 preco: '32.900',
                 descricao: 'Descrição do curso...',
                 imagem: 'https://picsum.photos/400/200?random=3'
             }, {
                 id: 4,
                 categoria: 'Engenharia Civil',
-                titulo: 'Cybersegurança',
+                titulo: 'Ganttproject',
                 preco: '33.000',
                 descricao: 'Descrição do curso...',
                 imagem: 'https://picsum.photos/400/200?random=4'
             }, {
                 id: 5,
                 categoria: 'Dimensionamento',
-                titulo: 'Node.js Backend',
+                titulo: 'Dimensionamento de Estruturas metálicas com Softwate',
                 preco: '40.000',
                 descricao: 'Descrição do curso...',
                 imagem: 'https://picsum.photos/400/200?random=5'
             }, {
                 id: 6,
                 categoria: "Dimensionamento",
-                titulo: 'React & Vue',
+                titulo: 'Topografia',
                 preco: '45.000',
                 descricao: 'Descrição do curso...',
                 imagem: 'https://picsum.photos/400/200?random=6'
             }, {
                 id: 7,
                 categoria: "Arquitetura",
-                titulo: 'UI/UX Design',
+                titulo: 'Revit + Lumion',
                 preco: '29.000',
                 descricao: 'Descrição do curso...',
                 imagem: 'https://picsum.photos/400/200?random=7'
             }, {
                 id: 8,
                 categoria: "Dimensionamento",
-                titulo: 'Marketing Digital',
+                titulo: 'SIG - Produção de mapas com QGIS',
                 preco: '15.000',
                 descricao: 'Descrição do curso...',
                 imagem: 'https://picsum.photos/400/200?random=8'
             }, {
                 id: 9,
                 categoria: 'Engenharia Civil',
-                titulo: 'Inglês Tech',
+                titulo: 'Civil 3D',
                 preco: '12.000',
                 descricao: 'Descrição do curso...',
                 imagem: 'https://picsum.photos/400/200?random=9'

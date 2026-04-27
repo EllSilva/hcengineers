@@ -4,222 +4,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dianguila - Filtros Avançados</title>
+    <title>FAQ - Fundação Bradesco (Vue 2)</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
     <style>
+         :root {
+            --bradesco-pink: #f52d5e;
+        }
+        
         body {
-            background-color: #f4f7f9;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', sans-serif;
+            color: #333;
         }
         
-        .card {
-            border-radius: 16px;
+        .faq-section {
+            padding: 60px 0;
+        }
+        
+        .faq-title {
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+        }
+        /* Item da FAQ */
+        
+        .faq-item {
+            border-bottom: 1px solid #eee;
+        }
+        
+        .faq-header {
+            width: 100%;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
             border: none;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1.1rem;
+            color: #333;
         }
         
-        .card-img-top {
-            height: 160px;
-            object-fit: cover;
-            border-radius: 16px 16px 0 0;
+        .faq-header:hover {
+            color: var(--bradesco-pink);
         }
-        /* Estilo dos inputs de filtro */
+        /* Ícone de seta com rotação */
         
-        .filter-section {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        .faq-header i {
+            color: var(--bradesco-pink);
+            transition: transform 0.3s ease;
         }
         
-        .form-control,
-        .form-select {
-            border-radius: 10px;
-            border: 1px solid #e5e7eb;
-            padding: 10px 15px;
+        .icon-active {
+            transform: rotate(90deg);
+        }
+        /* Resposta com animação */
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            color: #666;
+            line-height: 1.6;
         }
         
-        .form-control:focus,
-        .form-select:focus {
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-            border-color: #2563eb;
-        }
-        /* Paginação */
-        
-        .pagination .page-link {
-            border: none;
-            border-radius: 10px !important;
-            margin: 0 3px;
-            font-weight: 600;
-            color: #4b5563;
+        .is-open {
+            max-height: 300px;
+            /* Suficiente para o texto */
+            padding-bottom: 20px;
         }
         
-        .pagination .active .page-link {
-            background-color: #2563eb;
+        .btn-all {
+            color: var(--bradesco-pink);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        /* Card Rosa Lateral */
+        
+        .cta-card {
+            background-color: var(--bradesco-pink);
+            border-radius: 8px;
+            padding: 4rem 3rem;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-card p {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .btn-cta {
+            border: 2px solid white;
+            color: white;
+            border-radius: 50px;
+            padding: 8px 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+            transition: 0.3s;
+        }
+        
+        .btn-cta:hover {
+            background: white;
+            color: var(--bradesco-pink);
+        }
+        
+        .wink-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 7rem;
+            font-family: monospace;
+            opacity: 0.8;
+            pointer-events: none;
         }
     </style>
 </head>
 
 <body>
 
-    <div id="app" class="container py-5">
+    <div id="app" class="container faq-section">
+        <div class="row">
+            <div class="col-lg-7">
+                <h2 class="faq-title">Perguntas Frequentes</h2>
 
-        <div class="filter-section mb-5">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label class="form-label small fw-bold text-muted">Pesquisar por nome</label>
-                    <input type="text" v-model="filtroNome" class="form-control" placeholder="Ex: Python, Excel...">
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label small fw-bold text-muted">Categoria</label>
-                    <select v-model="filtroCategoria" class="form-select">
-                    <option value="">Todas as Categorias</option>
-                    <option v-for="cat in categorias" :key="cat" :value="cat">{{ cat }}</option>
-                </select>
-                </div>
-                <div class="col-md-2 d-flex align-items-end">
-                    <button @click="limparFiltros" class="btn btn-outline-secondary w-100 rounded-pill">Limpar</button>
-                </div>
-            </div>
-            <div class="mt-2 small text-muted" v-if="cursosFiltrados.length > 0">
-                Encontrados: <strong>{{ cursosFiltrados.length }}</strong> cursos.
-            </div>
-        </div>
+                <div class="faq-list">
+                    <div v-for="(item, index) in faqItems" :key="index" class="faq-item">
+                        <button @click="toggle(index)" class="faq-header">
+                        <span>{{ item.pergunta }}</span>
+                        <i class="bi bi-chevron-right" :class="{ 'icon-active': activeIndex === index }"></i>
+                    </button>
 
-        <div v-if="cursosFiltrados.length === 0" class="text-center py-5">
-            <h4 class="text-muted">Nenhum curso encontrado com esses filtros. 😕</h4>
-        </div>
-
-        <div class="row g-4">
-            <div v-for="curso in cursosPaginados" :key="curso.id" class="col-12 col-sm-6 col-lg-3">
-                <div class="card shadow-sm h-100">
-                    <img :src="curso.imagem" class="card-img-top">
-                    <div class="card-body d-flex flex-column">
-                        <span class="badge bg-primary bg-opacity-10 text-primary mb-2 w-fit-content" style="width: fit-content; font-size: 0.65rem;">
-                        {{ curso.categoria }}
-                    </span>
-                        <h5 class="card-title fw-bold h6 mb-3">{{ curso.titulo }}</h5>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fw-bold text-dark">{{ curso.preco }} Kz</span>
-                            <a href="#" class="btn btn-sm btn-primary rounded-pill px-3">Ver</a>
+                        <div class="faq-answer" :class="{ 'is-open': activeIndex === index }">
+                            {{ item.resposta }}
                         </div>
                     </div>
                 </div>
+
+                <a href="#" class="btn-all">Mostrar todas as perguntas</a>
+            </div>
+
+            <div class="col-lg-5 ps-lg-5">
+                <div class="cta-card shadow">
+                    <p>Quer iniciar a sua jornada de conhecimento?<br><strong>É grátis!</strong></p>
+                    <a href="#" class="btn-cta">Começar agora</a>
+                    <span class="wink-icon">;)</span>
+                </div>
             </div>
         </div>
-
-        <nav class="mt-5" v-if="totalPaginas > 1">
-            <ul class="pagination justify-content-center">
-                <li class="page-item" :class="{ disabled: paginaAtual === 1 }">
-                    <a class="page-link" href="#" @click.prevent="paginaAtual--">&laquo;</a>
-                </li>
-                <li v-for="pagina in totalPaginas" :key="pagina" class="page-item" :class="{ active: paginaAtual === pagina }">
-                    <a class="page-link" href="#" @click.prevent="paginaAtual = pagina">{{ pagina }}</a>
-                </li>
-                <li class="page-item" :class="{ disabled: paginaAtual === totalPaginas }">
-                    <a class="page-link" href="#" @click.prevent="paginaAtual++">&raquo;</a>
-                </li>
-            </ul>
-        </nav>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
     <script>
-        const {
-            createApp
-        } = Vue
-        createApp({
-            data() {
+        new Vue({
+            el: '#app',
+            data: function() {
                 return {
-                    paginaAtual: 1,
-                    itensPorPagina: 4,
-                    filtroNome: '',
-                    filtroCategoria: '',
-                    categorias: ['Desenvolvimento', 'Dados', 'Segurança', 'Design'],
-                    cursos: [{
-                        id: 1,
-                        titulo: 'Arquitetura Web 10X',
-                        categoria: 'Desenvolvimento',
-                        preco: '49.900',
-                        imagem: 'https://picsum.photos/400/250?random=1'
+                    activeIndex: -1,
+                    faqItems: [{
+                        pergunta: "Onde está localizado o certificado?",
+                        resposta: "Seu certificado fica disponível na seção 'Meus Cursos' no menu lateral, logo após você atingir a nota mínima e concluir o tempo de estudo exigido."
                     }, {
-                        id: 2,
-                        titulo: 'Excel Avançado',
-                        categoria: 'Dados',
-                        preco: '32.900',
-                        imagem: 'https://picsum.photos/400/250?random=2'
+                        pergunta: "Como realizar a matrícula nos cursos?",
+                        resposta: "Navegue pelo catálogo de cursos, clique no curso desejado e selecione o botão 'Quero me matricular'. Você terá acesso imediato às aulas."
                     }, {
-                        id: 3,
-                        titulo: 'Python para Data Science',
-                        categoria: 'Dados',
-                        preco: '35.000',
-                        imagem: 'https://picsum.photos/400/250?random=3'
-                    }, {
-                        id: 4,
-                        titulo: 'Cybersegurança Hacker',
-                        categoria: 'Segurança',
-                        preco: '33.000',
-                        imagem: 'https://picsum.photos/400/250?random=4'
-                    }, {
-                        id: 5,
-                        titulo: 'UI/UX com Figma',
-                        categoria: 'Design',
-                        preco: '28.000',
-                        imagem: 'https://picsum.photos/400/250?random=5'
-                    }, {
-                        id: 6,
-                        titulo: 'Node.js API Rest',
-                        categoria: 'Desenvolvimento',
-                        preco: '42.000',
-                        imagem: 'https://picsum.photos/400/250?random=6'
-                    }, {
-                        id: 7,
-                        titulo: 'Power BI Master',
-                        categoria: 'Dados',
-                        preco: '30.000',
-                        imagem: 'https://picsum.photos/400/250?random=7'
-                    }, ]
-                }
-            },
-            computed: {
-                // 1. PRIMEIRO: Filtra a lista completa
-                cursosFiltrados() {
-                    return this.cursos.filter(curso => {
-                        const matchNome = curso.titulo.toLowerCase().includes(this.filtroNome.toLowerCase());
-                        const matchCategoria = this.filtroCategoria === '' || curso.categoria === this.filtroCategoria;
-                        return matchNome && matchCategoria;
-                    });
-                },
-                // 2. SEGUNDO: Calcula as páginas com base no resultado filtrado
-                totalPaginas() {
-                    return Math.ceil(this.cursosFiltrados.length / this.itensPorPagina);
-                },
-                // 3. TERCEIRO: Pega a fatia para exibição
-                cursosPaginados() {
-                    const start = (this.paginaAtual - 1) * this.itensPorPagina;
-                    return this.cursosFiltrados.slice(start, start + this.itensPorPagina);
+                        pergunta: "Ao finalizar um curso, recebo um certificado?",
+                        resposta: "Sim. A Fundação Bradesco oferece certificados digitais gratuitos para todos os cursos da Escola Virtual, desde que o aluno complete os requisitos de avaliação."
+                    }]
                 }
             },
             methods: {
-                limparFiltros() {
-                    this.filtroNome = '';
-                    this.filtroCategoria = '';
-                    this.paginaAtual = 1;
-                }
-            },
-            watch: {
-                // Se o usuário digitar algo, volta para a página 1 para não ficar perdido
-                filtroNome() {
-                    this.paginaAtual = 1;
-                },
-                filtroCategoria() {
-                    this.paginaAtual = 1;
+                toggle: function(index) {
+                    // Se clicar no que já está aberto, fecha tudo (-1), senão abre o novo índice
+                    this.activeIndex = this.activeIndex === index ? -1 : index;
                 }
             }
-        }).mount('#app')
+        });
     </script>
 
 </body>

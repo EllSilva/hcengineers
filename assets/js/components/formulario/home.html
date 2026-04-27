@@ -1,0 +1,133 @@
+<main class="main_content container">
+
+    <section class="section-seu-codigo container">
+
+        <div class="content">
+
+            <h1 class="section_title"><i class="icon icon-code"></i> Preencha o formulário abaixo para se inscrever em nossos cursos</h1>
+
+            <div class="box-artigo">
+
+                <div class="container-form">
+
+                    <form class="form" method="post">
+
+                        <div class="input-box">
+                            <label>Nome completo</label>
+                            <input type="text" name="nome" placeholder="Digite seu nome" required="" v-model="form.nome">
+                        </div>
+
+                        <div class="column">
+
+                            <div class="input-box">
+                                <label>E-mail</label>
+                                <input type="email" name="email" placeholder="Digite seu e-mail" required="" v-model="form.email">
+                            </div>
+
+                            <div class="input-box">
+                                <label>Telefone</label>
+                                <input type="text" name="telefone" placeholder="Digite seu telefone" required="" v-model="form.telefone">
+                            </div>
+
+                        </div>
+
+
+                        <div class="column">
+
+                            <div class="input-box">
+                                <label>Pacote</label>
+
+                                <div class="select-box">
+
+                                    <select name="aprender" v-model="form.pacote">
+
+                                            <option value="" selected>Selecione</option>
+                                            <option value="Formulários">Formulários</option>
+                                            <option value="Menus">Menus</option>
+                                            <option value="Rodapé">Rodapé</option>
+                                            <option value="Botão">Botão</option>
+                                            <option value="Galeria de Fotos">Galeria de Fotos</option>
+
+                                        </select>
+
+                                </div>
+                            </div>
+
+                            <div class="input-box">
+
+                                <label>Categoria</label>
+                                <div class="select-box">
+
+                                    <select name="aprender" v-model="form.categoria">
+
+                                            <option value="" selected>Selecione</option>
+                                            <option value="Formulários">Formulários</option>
+                                            <option value="Menus">Menus</option>
+                                            <option value="Rodapé">Rodapé</option>
+                                            <option value="Botão">Botão</option>
+                                            <option value="Galeria de Fotos">Galeria de Fotos</option>
+
+                                        </select>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-box">
+
+                            <label>O que quer aprender ? ( Curso )</label>
+                            <div class="column">
+
+                                <div class="select-box">
+
+                                    <select name="aprender" v-model="form.curso">
+
+                                            <option value="" selected>Selecione</option>
+                                            <option value="Formulários">Formulários</option>
+                                            <option value="Menus">Menus</option>
+                                            <option value="Rodapé">Rodapé</option>
+                                            <option value="Botão">Botão</option>
+                                            <option value="Galeria de Fotos">Galeria de Fotos</option>
+
+                                        </select>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <label class="naoexibir">
+                                <span>Não preencher:</span><br>
+                                <input type="text" name="url" value=""></p>
+                            </label>
+
+                        <div class="input-box">
+
+                            <textarea name="mensagem" cols="30" rows="3" v-model="form.mensagem" required></textarea>
+
+                        </div>
+
+                        <button class="btn btn-primary" @click="enviarWhatsApp">Enviar Inscrição via WhatsApp</button>
+
+
+                    </form>
+
+                </div>
+                <!--container-form-->
+
+            </div>
+            <!--Box Artigo-->
+
+
+            <div class="clear"></div>
+        </div>
+    </section>
+    <!--FECHA BOX HTML-->
+
+
+</main>

@@ -2,30 +2,29 @@ import get_template from "../../components/get_template.js";
 import { bus } from "../../components/bus.js"; // ajuste caminho
 
 export default {
-  data: function () {
-    return {
-      title: "home",
-      menuOpen: false,
-      currentRoute: window.location.hash.replace('#', '')
-    };
-  },
+    data: function() {
+        return {
+            mostrarModal: false
+        };
+    },
 
-  methods: {
-  
-  },
+    methods: {
+        abrirModal() {
+            this.mostrarModal = true;
+        },
+        fecharModal() {
+            this.mostrarModal = false;
+        }
+    },
 
-  
-  created() {
-    bus.$on("toggle-menu", () => {
-      this.menuOpen = !this.menuOpen;
-    });
-  },
+
+    created() {
+
+    },
 
     mounted() {
-    window.addEventListener('hashchange', () => {
-      this.currentRoute = window.location.hash.replace('#', '');
-    });   
-  },
 
-  template: await get_template("./assets/js/components/menu/home"),
+    },
+
+    template: await get_template("./assets/js/components/menu/home"),
 };

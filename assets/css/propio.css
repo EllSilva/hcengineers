@@ -607,3 +607,400 @@
                                 right: 15px;
                             }
                         }
+                        /* ===== ANIMAÇÃO DO MODAL ===== */
+                        
+                        .modal-fade-enter-active,
+                        .modal-fade-leave-active {
+                            transition: all 0.25s ease;
+                        }
+                        
+                        .modal-fade-enter-from,
+                        .modal-fade-leave-to {
+                            opacity: 0;
+                            transform: scale(0.92);
+                        }
+                        
+                        .modal-fade-enter-to,
+                        .modal-fade-leave-from {
+                            opacity: 1;
+                            transform: scale(1);
+                        }
+                        /* Backdrop suave */
+                        
+                        .backdrop-fade-enter-active,
+                        .backdrop-fade-leave-active {
+                            transition: opacity 0.25s ease;
+                        }
+                        
+                        .backdrop-fade-enter-from,
+                        .backdrop-fade-leave-to {
+                            opacity: 0;
+                        }
+                        
+                        .backdrop-fade-enter-to,
+                        .backdrop-fade-leave-from {
+                            opacity: 1;
+                        }
+                        /* ===== fim ANIMAÇÃO DO MODAL ===== */
+                        /*-------------------- FORMULARIO --------------------------*/
+                        
+                        .modalexx {
+                            z-index: 1;
+                        }
+                        
+                        .content {
+                            float: left;
+                            width: 100%;
+                            margin: 0 4%;
+                            padding: 20px 0;
+                        }
+                        /*Seu Código*/
+                        
+                        .section-seu-codigo {
+                            padding: 10px 0px;
+                            background-color: #f4f4f4;
+                            height: 80px;
+                        }
+                        
+                        .section-seu-codigo .content {
+                            float: left;
+                            padding: 1em 0;
+                        }
+                        
+                        .section-seu-codigo .content p {
+                            text-align: center;
+                            color: #007cff;
+                            font-size: 1.3em;
+                            font-weight: bold;
+                        }
+                        
+                        .section_title {
+                            width: 100%;
+                            float: left;
+                            margin-bottom: 1em;
+                            font-size: 1.1em;
+                            font-weight: 300;
+                            text-align: center;
+                            border-bottom: 1px #eceaea solid;
+                            padding-bottom: 1em;
+                        }
+                        
+                        .box-artigo {
+                            width: 100%;
+                            float: left;
+                        }
+                        /*Formulario*/
+                        
+                        .container-form {
+                            position: relative;
+                            width: 100%;
+                            margin: auto;
+                        }
+                        
+                        .container-form .title-form {
+                            font-size: 1.2em;
+                            color: #000;
+                            font-weight: 600;
+                            text-align: center;
+                        }
+                        
+                        .container-form .form {
+                            margin-top: 15px;
+                        }
+                        
+                        .form .input-box {
+                            width: 100%;
+                            margin-top: 10px;
+                        }
+                        
+                        .input-box label {
+                            color: #000;
+                        }
+                        
+                        .form :where(.input-box input,
+                        .select-box) {
+                            position: relative;
+                            height: 35px;
+                            width: 100%;
+                            outline: none;
+                            font-size: 1rem;
+                            color: #333;
+                            margin-top: 5px;
+                            border: 1px solid #A4E3F0;
+                            border-radius: 6px;
+                            padding: 0 15px;
+                            background: #E9F8FB;
+                        }
+                        
+                        .input-box input:focus {
+                            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+                        }
+                        
+                        .form :where(.input-box textarea) {
+                            position: relative;
+                            height: 100px;
+                            width: 100%;
+                            outline: none;
+                            font-size: 1rem;
+                            color: #333;
+                            margin-top: 5px;
+                            border: 1px solid #A4E3F0;
+                            border-radius: 6px;
+                            padding: 10px;
+                            background: #E9F8FB;
+                        }
+                        
+                        .input-box textarea:focus {
+                            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+                        }
+                        
+                        .form .column {
+                            display: flex;
+                            column-gap: 15px;
+                        }
+                        
+                        .form .gender-box {
+                            margin-top: 10px;
+                        }
+                        
+                        .form :where(.gender-option,
+                        .gender) {
+                            display: flex;
+                            align-items: center;
+                            column-gap: 50px;
+                            flex-wrap: wrap;
+                        }
+                        
+                        .form .gender {
+                            column-gap: 5px;
+                        }
+                        
+                        .gender input {
+                            accent-color: #007CFF;
+                            float: left;
+                            width: 15px;
+                            height: 15px;
+                        }
+                        
+                        .form :where(.gender input,
+                        .gender textarea,
+                        .gender label) {
+                            cursor: pointer;
+                        }
+                        
+                        .gender label {
+                            color: #000;
+                        }
+                        
+                        .address :where(input,
+                        .select-box) {
+                            margin-top: 10px;
+                        }
+                        
+                        .select-box select {
+                            height: 100%;
+                            width: 100%;
+                            outline: none;
+                            border: none;
+                            color: #808080;
+                            font-size: 1em;
+                            background: #e9f8fb;
+                        }
+                        
+                        .form button {
+                            height: 40px;
+                            width: 100%;
+                            color: #ffffff;
+                            font-size: 1rem;
+                            font-weight: 400;
+                            margin-top: 15px;
+                            border: none;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            transition: all 0.2s ease;
+                            background: #007cff;
+                        }
+                        
+                        .form button:hover {
+                            background: #28D1F2;
+                        }
+                        /*Anti-span*/
+                        
+                        .naoexibir {
+                            display: none;
+                        }
+                        /*Começa o Responsivo*/
+                        /*480PX BREAKPOINT*/
+                        /*480 dividido por 16 = 30em*/
+                        
+                        @media (min-width:30em) {
+                            .boxBannerTopo {
+                                padding: 1em 0;
+                            }
+                        }
+                        /*600PX BREAKPOINT*/
+                        /*600 dividido por 16 = 37,5em*/
+                        
+                        @media (min-width:37em) {}
+                        /*768PX BREAKPOINT*/
+                        /*768 dividido por 16 = 48em*/
+                        
+                        @media (min-width:48em) {}
+                        /*960PX BREAKPOINT*/
+                        /*960 dividido por 16 = 60em*/
+                        
+                        @media (min-width:60em) {
+                            .section-seu-codigo {
+                                padding: 20px 0px;
+                            }
+                            .section-seu-codigo .content {
+                                width: 80%;
+                                padding: 1em 0;
+                                margin: 0 10%;
+                            }
+                            .box-download {
+                                width: 62%;
+                                float: left;
+                            }
+                            .box-anun {
+                                width: 33%;
+                                float: right;
+                                margin-top: 60px;
+                            }
+                        }
+                        /*1280PX BREAKPOINT*/
+                        /*1280 dividido por 16 = 80em*/
+                        
+                        @media (min-width:80em) {}
+                        /*1366PX BREAKPOINT*/
+                        /*1366 dividido por 16 = 85,375em*/
+                        
+                        @media (min-width:85em) {
+                            .content {
+                                width: 80%;
+                                margin: 0 10%;
+                            }
+                        }
+                        /*1600PX BREAKPOINT*/
+                        /*1600 dividido por 16 = 100em*/
+                        
+                        @media (min-width:100em) {}
+                        /*Fecha o Responsivo*/
+                        /* ===== PERGUNTA FREQUENTE ===== */
+                        
+                         :root {
+                            --bradesco-pink: #b8024c;
+                        }
+                        
+                        .faq-section {
+                            padding: 60px 0;
+                        }
+                        
+                        .faq-title {
+                            font-weight: 700;
+                            font-size: 2.2rem;
+                            margin-bottom: 2rem;
+                        }
+                        /* Item da FAQ */
+                        
+                        .faq-item {
+                            border-bottom: 1px solid #eee;
+                        }
+                        
+                        .faq-header {
+                            width: 100%;
+                            padding: 20px 0;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            background: none;
+                            border: none;
+                            cursor: pointer;
+                            text-align: left;
+                            font-size: 1.1rem;
+                            color: #333;
+                        }
+                        
+                        .faq-header:hover {
+                            color: var(--bradesco-pink);
+                        }
+                        /* Ícone de seta com rotação */
+                        
+                        .faq-header i {
+                            color: var(--bradesco-pink);
+                            transition: transform 0.3s ease;
+                        }
+                        
+                        .icon-active {
+                            transform: rotate(90deg);
+                        }
+                        /* Resposta com animação */
+                        
+                        .faq-answer {
+                            max-height: 0;
+                            overflow: hidden;
+                            transition: max-height 0.3s ease-out, padding 0.3s ease;
+                            color: #666;
+                            line-height: 1.6;
+                        }
+                        
+                        .is-open {
+                            max-height: 300px;
+                            /* Suficiente para o texto */
+                            padding-bottom: 20px;
+                        }
+                        
+                        .btn-all {
+                            color: var(--bradesco-pink);
+                            font-weight: 700;
+                            text-decoration: none;
+                            display: inline-block;
+                            margin-top: 20px;
+                        }
+                        /* Card Rosa Lateral */
+                        
+                        .cta-card {
+                            background-color: var(--bradesco-pink);
+                            border-radius: 8px;
+                            padding: 4rem 3rem;
+                            color: white;
+                            position: relative;
+                            overflow: hidden;
+                        }
+                        
+                        .cta-card p {
+                            font-size: 1.6rem;
+                            margin-bottom: 2rem;
+                            position: relative;
+                            z-index: 2;
+                        }
+                        
+                        .btn-cta {
+                            border: 2px solid white;
+                            color: white;
+                            border-radius: 50px;
+                            padding: 8px 25px;
+                            text-decoration: none;
+                            font-weight: 600;
+                            display: inline-block;
+                            position: relative;
+                            z-index: 2;
+                            transition: 0.3s;
+                        }
+                        
+                        .btn-cta:hover {
+                            background: white;
+                            color: var(--bradesco-pink);
+                        }
+                        
+                        .wink-icon {
+                            position: absolute;
+                            right: 15px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            font-size: 7rem;
+                            font-family: monospace;
+                            opacity: 0.8;
+                            pointer-events: none;
+                        }
+                        /* ===== FIM PERGUNTA FREQUENTE ===== */
