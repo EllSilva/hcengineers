@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dianguila - Filtros Avançados</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <style>
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .card {
+            border-radius: 16px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .card-img-top {
+            height: 160px;
+            object-fit: cover;
+            border-radius: 16px 16px 0 0;
+        }
+        /* Estilo dos inputs de filtro */
+        
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+        
+        .form-control,
+        .form-select {
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            padding: 10px 15px;
+        }
+        
+        .form-control:focus,
+        .form-select:focus {
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            border-color: #2563eb;
+        }
+        /* Paginação */
+        
+        .pagination .page-link {
+            border: none;
+            border-radius: 10px !important;
+            margin: 0 3px;
+            font-weight: 600;
+            color: #4b5563;
+        }
+        
+        .pagination .active .page-link {
+            background-color: #2563eb;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app" class="container py-5">
+
+        <div class="filter-section mb-5">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold text-muted">Pesquisar por nome</label>
+                    <input type="text" v-model="filtroNome" class="form-control" placeholder="Ex: Python, Excel...">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label small fw-bold text-muted">Categoria</label>
+                    <select v-model="filtroCategoria" class="form-select">
+                    <option value="">Todas as Categorias</option>
+                    <option v-for="cat in categorias" :key="cat" :value="cat">{{ cat }}</option>
+                </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button @click="limparFiltros" class="btn btn-outline-secondary w-100 rounded-pill">Limpar</button>
+                </div>
+            </div>
+            <div class="mt-2 small text-muted" v-if="cursosFiltrados.length > 0">
+                Encontrados: <strong>{{ cursosFiltrados.length }}</strong> cursos.
+            </div>
+        </div>
+
+        <div v-if="cursosFiltrados.length === 0" class="text-center py-5">
+            <h4 class="text-muted">Nenhum curso encontrado com esses filtros. 😕</h4>
+        </div>
+
+        <div class="row g-4">
+            <div v-for="curso in cursosPaginados" :key="curso.id" class="col-12 col-sm-6 col-lg-3">
+                <div class="card shadow-sm h-100">
+                    <img :src="curso.imagem" class="card-img-top">
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-primary bg-opacity-10 text-primary mb-2 w-fit-content" style="width: fit-content; font-size: 0.65rem;">
+                        {{ curso.categoria }}
+                    </span>
+                        <h5 class="card-title fw-bold h6 mb-3">{{ curso.titulo }}</h5>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-dark">{{ curso.preco }} Kz</span>
+                            <a href="#" class="btn btn-sm btn-primary rounded-pill px-3">Ver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="mt-5" v-if="totalPaginas > 1">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" :class="{ disabled: paginaAtual === 1 }">
+                    <a class="page-link" href="#" @click.prevent="paginaAtual--">&laquo;</a>
+                </li>
+                <li v-for="pagina in totalPaginas" :key="pagina" class="page-item" :class="{ active: paginaAtual === pagina }">
+                    <a class="page-link" href="#" @click.prevent="paginaAtual = pagina">{{ pagina }}</a>
+                </li>
+                <li class="page-item" :class="{ disabled: paginaAtual === totalPaginas }">
+                    <a class="page-link" href="#" @click.prevent="paginaAtual++">&raquo;</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        const {
+            createApp
+        } = Vue
+        createApp({
+            data() {
+                return {
+                    paginaAtual: 1,
+                    itensPorPagina: 4,
+                    filtroNome: '',
+                    filtroCategoria: '',
+                    categorias: ['Desenvolvimento', 'Dados', 'Segurança', 'Design'],
+                    cursos: [{
+                        id: 1,
+                        titulo: 'Arquitetura Web 10X',
+                        categoria: 'Desenvolvimento',
+                        preco: '49.900',
+                        imagem: 'https://picsum.photos/400/250?random=1'
+                    }, {
+                        id: 2,
+                        titulo: 'Excel Avançado',
+                        categoria: 'Dados',
+                        preco: '32.900',
+                        imagem: 'https://picsum.photos/400/250?random=2'
+                    }, {
+                        id: 3,
+                        titulo: 'Python para Data Science',
+                        categoria: 'Dados',
+                        preco: '35.000',
+                        imagem: 'https://picsum.photos/400/250?random=3'
+                    }, {
+                        id: 4,
+                        titulo: 'Cybersegurança Hacker',
+                        categoria: 'Segurança',
+                        preco: '33.000',
+                        imagem: 'https://picsum.photos/400/250?random=4'
+                    }, {
+                        id: 5,
+                        titulo: 'UI/UX com Figma',
+                        categoria: 'Design',
+                        preco: '28.000',
+                        imagem: 'https://picsum.photos/400/250?random=5'
+                    }, {
+                        id: 6,
+                        titulo: 'Node.js API Rest',
+                        categoria: 'Desenvolvimento',
+                        preco: '42.000',
+                        imagem: 'https://picsum.photos/400/250?random=6'
+                    }, {
+                        id: 7,
+                        titulo: 'Power BI Master',
+                        categoria: 'Dados',
+                        preco: '30.000',
+                        imagem: 'https://picsum.photos/400/250?random=7'
+                    }, ]
+                }
+            },
+            computed: {
+                // 1. PRIMEIRO: Filtra a lista completa
+                cursosFiltrados() {
+                    return this.cursos.filter(curso => {
+                        const matchNome = curso.titulo.toLowerCase().includes(this.filtroNome.toLowerCase());
+                        const matchCategoria = this.filtroCategoria === '' || curso.categoria === this.filtroCategoria;
+                        return matchNome && matchCategoria;
+                    });
+                },
+                // 2. SEGUNDO: Calcula as páginas com base no resultado filtrado
+                totalPaginas() {
+                    return Math.ceil(this.cursosFiltrados.length / this.itensPorPagina);
+                },
+                // 3. TERCEIRO: Pega a fatia para exibição
+                cursosPaginados() {
+                    const start = (this.paginaAtual - 1) * this.itensPorPagina;
+                    return this.cursosFiltrados.slice(start, start + this.itensPorPagina);
+                }
+            },
+            methods: {
+                limparFiltros() {
+                    this.filtroNome = '';
+                    this.filtroCategoria = '';
+                    this.paginaAtual = 1;
+                }
+            },
+            watch: {
+                // Se o usuário digitar algo, volta para a página 1 para não ficar perdido
+                filtroNome() {
+                    this.paginaAtual = 1;
+                },
+                filtroCategoria() {
+                    this.paginaAtual = 1;
+                }
+            }
+        }).mount('#app')
+    </script>
+
+</body>
+
+</html>

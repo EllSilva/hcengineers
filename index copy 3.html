@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dianguila - Elite Tech Academy (Bootstrap)</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Ajustes finos para aproximar ao design original */
+        
+        .card {
+            border-radius: 20px;
+            border: 1px solid #eee;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .card-img-top {
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .badge-category {
+            font-size: 10px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            padding: 5px 12px;
+            font-weight: bold;
+        }
+        
+        .price-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+        
+        .btn-view {
+            color: #0d6efd;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .description-truncate {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app" class="container py-5">
+        <div class="row g-4">
+
+            <div v-for="curso in cursos" :key="curso.id" class="col-12 col-sm-6 col-lg-3">
+                <div class="card shadow-sm h-100">
+                    <img :src="curso.imagem" class="card-img-top" :alt="curso.titulo">
+
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-3">
+                            <span class="badge badge-category bg-light text-dark me-1">{{ curso.categoria }}</span>
+                            <span class="badge badge-category bg-warning bg-opacity-10 text-warning">Intermediário</span>
+                        </div>
+
+                        <h5 class="card-title fw-bold mb-2" style="font-size: 1.1rem;">{{ curso.titulo }}</h5>
+
+                        <div class="mb-2">
+                            <small class="text-warning">★★★★★</small>
+                            <small class="text-muted ms-1" style="font-size: 0.75rem;">(1 avaliações)</small>
+                        </div>
+
+                        <p class="card-text description-truncate mb-4">
+                            {{ curso.descricao }}
+                        </p>
+
+                        <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
+                            <span class="price-text">{{ curso.preco }}Kz</span>
+                            <a href="#" class="btn-view">Ver Curso &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const {
+            createApp
+        } = Vue
+
+        createApp({
+            data() {
+                return {
+                    cursos: [{
+                        id: 1,
+                        titulo: 'Arquitetura Web 10X',
+                        categoria: 'Desenvolvimento Web',
+                        descricao: 'O único curso que forma programadores sólidos na base da IA, ensinando a própria Web profundamente...',
+                        preco: '49.900,00',
+                        imagem: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=400&q=80'
+                    }, {
+                        id: 2,
+                        titulo: 'Excel do Básico ao Avançado',
+                        categoria: 'Ciência de Dados',
+                        descricao: 'Domine a Folha de Cálculo com o Microsoft Excel com a finalidade de introduzir os alunos ao mundo dos dados.',
+                        preco: '32.900,00',
+                        imagem: 'https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=400&q=80'
+                    }, {
+                        id: 3,
+                        titulo: 'Curso Completo de Python',
+                        categoria: 'Ciência de Dados',
+                        descricao: 'Do Zero ao Avançado com Projetos Reais | Duração sugerida de 6 meses. Sem pré-requisitos.',
+                        preco: '32.900,00',
+                        imagem: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80'
+                    }, {
+                        id: 4,
+                        titulo: 'Cybersegurança Moderna',
+                        categoria: 'Segurança',
+                        descricao: 'Público: qualquer pessoa que queira lidar com tecnologia. Objetivo: segurança real e prática para devs.',
+                        preco: '33.000,00',
+                        imagem: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=400&q=80'
+                    }]
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
