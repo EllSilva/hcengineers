@@ -1,114 +1,75 @@
 <div>
 
     <section class="principal">
+        <div class="slider-container">
+            <div id="mainCarousel" class="carousel slide carousel-fade custom-slider" data-bs-ride="carousel">
 
-        <div class=" hero-section_princ princ ">
-            <div class="content-container_princ">
-                <div class="badge">Educação</div>
+                <div class="carousel-indicators">
+                    <button v-for="(slide, index) in slides" :key="'ind-'+index" type="button" data-bs-target="#mainCarousel" :data-bs-slide-to="index" :class="{ active: index === 0 }">
+            </button>
+                </div>
 
-                <h1 style="color: white;">Dê o próximo passo rumo à <span>excelência.</span></h1>
+                <div class="carousel-inner">
+                    <div v-for="(slide, index) in slides" :key="'slide-'+index" class="carousel-item" :class="{ active: index === 0 }">
 
-                <p class="description">
-                    Oferecemos programas de formação personalizados e planos de formação adaptados a diversas necessidades.
 
-                    <div class="features-grid">
-                        <div class="feature-item">
-                            <div class="icon-box">🏆</div>
-                            <div class="feature-text">
-                                <h3>Qualificação Certificada</h3>
-                                <p>Certificada pela validade no mercado e público global.</p>
-                            </div>
+                        <div class="img-container">
+                            <img :src="slide.image" class="w-100" :alt="slide.title">
                         </div>
 
-                        <div class="feature-item">
-                            <div class="icon-box">📈</div>
-                            <div class="feature-text">
-                                <h3>Eleva o seu nível</h3>
-                                <p>Aprenda presencialmente e veja sua evolução acontecer.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="btn-group">
-                        <a href="#/cursos" class="btn_1">Ver Curso </a>
-                        <a @click="abrirModal" class="btn_2">Inscreva-se Agora </a>
-                    </div>
-            </div>
-
-            <div class="image-container"></div>
 
 
-        </div>
-    </section>
+                        <div class="glass-card shadow-lg">
+                            <div class="content-container_princ">
+                                <div class="badge p-2">Educação</div>
 
-    <!-- learning part start Formação progressiva-->
-    <section class="learning_part">
-        <div class="container">
-            <div class="row align-items-sm-center align-items-lg-stretch">
-                <div class="col-md-6 col-lg-6">
+                                <h1 style="color: white;">{{slide.title}}</span>
+                                </h1>
 
+                                <p class="description">
+                                    {{slide.description}}
+                                </p>
 
-                    <section class="hero-section">
-                        <div class="image-side">
-                            <div class="tech-card">
-                                <div class="info-popup">
-                                    <div class="rocket-icon">🚀</div>
-                                    <div class="popup-content">
-                                        <h4>Garantia de Sucesso</h4>
-                                        <p>A maioria dos nossos alunos conquista emprego em menos de 6 meses.</p>
-                                    </div>
+                                <div class="btn-group">
+                                    <a href="#/cursos" class="btn_1">Ver Curso </a>
+                                    <a @click="abrirModal" class="btn_2">Inscreva-se Agora </a>
                                 </div>
                             </div>
                         </div>
-                    </section>
-
-
-                </div>
-                <div class="col-md-6 col-lg-6">
-                    <div class="learning_member_text">
-                        <h5>Sobre nós</h5>
-                        <h2>ACADEMIA HCENGINEERS</h2>
-                        <p>Nossos cursos são desenvolvidos por especialistas do mercado angolano, combinando teoria e prática para garantir que nossos alunos estejam preparados para os desafios do setor de construção em Angola.</p>
-                        <ul>
-                            <li><span class="ti-book"></span>Instrutores altamente qualificados e experientes no mercado profissional</li>
-                            <li><span class="ti-pencil-alt"></span>Material didático atualizado, completo e orientado para a prática</li>
-                            <li><span class="ti-receipt"></span>Certificação reconhecida e validada pelo INEFOP
-                            </li>
-                        </ul>
-                        <a href="#" class="btn_1">Leia mais</a>
                     </div>
                 </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 20px;"></span>
+        </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="width: 20px;"></span>
+        </button>
             </div>
         </div>
     </section>
-    <!-- learning part end-->
+
 
     <!-- feature_part start-->
     <section class="feature_part">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-xl-3 align-self-center">
-                    <div class="single_feature_text ">
-                        <h2>Rumo ao <br> Sucesso</h2>
-                        <p>Um percurso estruturado e focado na prática para garantir que você alcance os seus objetivos profissionais. </p>
-                        <a href="#" class="btn_1">Saber mais</a>
-                    </div>
-                </div>
+        <div class="container ">
+            <div class="row  " style=" display: flex; justify-content: center;  align-items: center">
+
                 <div class="col-sm-6 col-xl-3">
                     <div class="single_feature">
                         <div class="single_feature_part">
                             <span class="single_feature_icon"><i class="ti-layers"></i></span>
-                            <h4>Defina o Caminho</h4>
-                            <p>Selecione um curso individual ou siga um roadmap de carreira desenhado por especialistas.</p>
+                            <h4>Tecnologia</h4>
+                            <p>Aprendizado com as ferramentas mais modernas do mercado</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-xl-3">
+                <div class="col-sm-6 col-xl-4">
                     <div class="single_feature">
                         <div class="single_feature_part">
                             <span class="single_feature_icon"><i class="bi bi-person-workspace"></i></span>
-                            <h4>Mentoria</h4>
-                            <p>Receba apoio de especialistas para esclarecer dúvidas e alcançar os seus objetivos.</p>
+                            <h4>Mentor</h4>
+                            <p>Receba apoio de especialistas, tire dúvidas e alcance seus objetivos.</p>
                         </div>
                     </div>
                 </div>
@@ -127,48 +88,45 @@
     <!-- upcoming_event part start-->
 
 
-    <!-- member_counter counter start -->
-    <section class="member_counter">
+    <!-- learning part start Formação progressida-->
+    <section class="learning_part">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6 col-6">
-                    <div class="single_member_counter">
-                        <span class="counter">24</span>
-                        <h4>Professores</h4>
-                    </div>
+            <div class="row align-items-sm-center align-items-lg-stretch">
+                <div class="col-md-7 col-lg-7">
+
+                    <img src="./assets/img/sobre.jpg" alt="" srcset="" style=" object-fit: cover;
+                            border-radius:56px 56px 0 0;">
+
                 </div>
-                <div class="col-lg-3 col-sm-6 col-6">
-                    <div class="single_member_counter">
-                        <span class="counter">+160</span>
-                        <h4>Estudantes Ativos</h4>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-6">
-                    <div class="single_member_counter">
-                        <span class="counter">1020</span>
-                        <h4>Certificação</h4>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-6">
-                    <div class="single_member_counter">
-                        <span class="counter">24/7 </span>
-                        <h4>Suporte</h4>
+
+                <div class="col-md-5 col-lg-5 pt-5">
+                    <div class="learning_member_text">
+                        <h5>Sobre nós</h5>
+                        <h2>ACADEMIA HCENGINEERS</h2>
+                        <p>Nossos cursos são desenvolvidos por especialistas do mercado angolano, combinando teoria e prática para garantir que nossos alunos estejam preparados para os desafios do setor de construção em Angola.</p>
+                        <ul>
+                            <li><span class="ti-book"></span>Instrutores altamente qualificados e experientes no mercado profissional</li>
+                            <li><span class="ti-pencil-alt"></span>Material didático atualizado, completo e orientado para a prática</li>
+                            <li><span class="ti-receipt"></span>Certificação reconhecida e validada pelo INEFOP
+                            </li>
+                        </ul>
+                        <a href="#/sobre" class="btn_1">Leia mais</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- member_counter counter end -->
+    <!-- learning part end-->
 
 
 
     <!--::review_part start::-->
-    <section class="special_cource padding_top">
+    <section class="special_cource  ">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-5">
                     <div class="section_tittle text-center">
-                        <p>popular courses</p>
+                        <p>Planos flexíveis adaptados ao seu crescimento profissional.</p>
                         <h2>Planos de Formação</h2>
                     </div>
                 </div>
@@ -180,7 +138,7 @@
                         <div class="card custom-card text-start">
                             <div class="card-img-wrapper">
                                 <span class="badge-elite">Certificados</span>
-                                <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&q=80&w=500" class="card-img-top" alt="Data Science">
+                                <img src="./assets/img/engenharia.jpeg" class="card-img-top" alt="Data Science">
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Engenharia Civil</h5>
@@ -204,7 +162,7 @@
                         <div class="card custom-card text-start">
                             <div class="card-img-wrapper">
                                 <span class="badge-elite">Certificados</span>
-                                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=500" class="card-img-top" alt="Frontend">
+                                <img src="./assets/img/arquit.jpeg" class="card-img-top" alt="Frontend">
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Arquitetura</h5>
@@ -228,7 +186,7 @@
                         <div class="card custom-card text-start">
                             <div class="card-img-wrapper">
                                 <span class="badge-elite">Certificados</span>
-                                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=500" class="card-img-top" alt="Cybersecurity">
+                                <img src="./assets/img/dimens.jpeg" class="card-img-top" alt="Cybersecurity">
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Dimensionamento</h5>
@@ -254,45 +212,134 @@
     </section>
     <!--::blog_part end::-->
 
-    <!-- learning part start-->
-    <section class="advance_feature learning_part">
+    <!-- member_counter counter end -->
+
+
+
+    <!--::review_part start::-->
+    <section class="special_cource padding_top fundo_destaque">
         <div class="container">
-            <div class="row align-items-sm-center align-items-xl-stretch">
-                <div class="col-md-6 col-lg-6">
-                    <div class="learning_member_text">
-                        <h5> Planos de Formação</h5>
-                        <h2>Sequências de cursos preparadas para você se capacitar.</h2>
-                        <p>Construa sua carreira com o passo a passo dos Planos de Formação que melhor se adaptam aos seus objetivos, desenvolva competências sólidas e conquiste o seu espaço no mercado de trabalho.</p>
-                        <div class="row">
-                            <div class="col-sm-6 col-md-12 col-lg-6">
-                                <div class="learning_member_text_iner">
-                                    <span class="bi bi-graph-up-arrow"></span>
-                                    <h4>Formação progressiva</h4>
-                                    <p>Aprenda de forma organizada e evolua continuamente nas suas competências.</p>
+            <div class="row justify-content-center">
+                <div class="col-xl-5">
+                    <div class="section_tittle text-center">
+                        <p>popular courses</p>
+                        <h2>Cursos em Destaque</h2>
+                    </div>
+                </div>
+            </div>
+            <div class=" ">
+                <div class="row g-4">
+
+
+                    <div v-for="curso in cursos" :key="curso.id" class="col-12 col-sm-6 col-lg-3 p-2">
+                        <div class="card shadow-sm h-100">
+                            <img :src="curso.imagem" class="card-img-top" :alt="curso.titulo">
+
+                            <div class="card-body d-flex flex-column">
+                                <div class="mb-3">
+                                    <span class="badge badge-category bg-light text-dark me-1">{{ curso.categoria }}</span>
                                 </div>
-                            </div>
-                            <div class="col-sm-6 col-md-12 col-lg-6">
-                                <div class="learning_member_text_iner">
-                                    <span class="ti-stamp"></span>
-                                    <h4>Resultados práticos</h4>
-                                    <p>Desenvolva habilidades práticas e esteja preparado para desafios reais.</p>
+
+                                <h5 class="card-title fw-bold mb-2" style="font-size: 1.1rem;">{{ curso.titulo }}</h5>
+
+                                <div class="mb-2">
+                                    <small class="text-warning">★★★★★</small>
+                                    <small class="text-muted ms-1" style="font-size: 0.75rem;">(1 avaliações)</small>
+                                </div>
+
+                                <p class="card-text description-truncate mb-4">
+                                    {{ curso.descricao }}
+                                </p>
+
+                                <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
+                                    <span class="price-text">{{ curso.preco }}Kz</span>
+                                    <a href="#" class="btn-view">Ver Curso &rarr;</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="learning_img">
-                        <img src="./assets/img/advance_feature_img.png" alt="">
-                    </div>
-                </div>
             </div>
         </div>
     </section>
-    <!-- learning part end-->
+    <!--::blog_part end::-->
+
+    <section class="plano-neg">
+
+        <div class="hero-card">
+            <!-- Texto -->
+            <div class="content-side">
+                <div class="badge-pill">Planos de Formação</div>
+
+                <h1 class="hero-title">
+                    Sequências de cursos preparadas para você se<br>
+                    <span>capacitar.</span>
+                </h1>
+
+                <p class="hero-desc">
+                    Construa sua carreira com o passo a passo dos Planos de Formação que melhor se adaptam aos seus objetivos, desenvolva competências sólidas e conquiste o seu espaço no mercado de trabalho.
+                </p>
+
+                <div class="row">
+                    <div class="col-md-6 feature-item d-flex">
+                        <div class="feature-icon"><i class="bi bi-patch-check"></i></div>
+                        <div class="feature-text">
+                            <h6>Resultados práticos</h6>
+                            <p>Desenvolva habilidades práticas e esteja preparado para desafios reais.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 feature-item d-flex">
+                        <div class="feature-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                        <div class="feature-text">
+                            <h6>Formação progressiva</h6>
+                            <p>Aprenda de forma organizada e evolua continuamente nas suas competências.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Imagem -->
+            <div class="image-side"></div>
+        </div>
+
+    </section>
 
 
-    <div class="container faq-section p-3">
+
+
+
+    <div class="container-fluid padding_top pb-5">
+        <div class="slider-window">
+
+            <!-- Botões de Navegação (Bootstrap) -->
+            <button class="btn btn-light btn-nav btn-prev shadow" @click="prev">
+            <span class="fs-4">❮</span>
+        </button>
+            <button class="btn btn-light btn-nav btn-next shadow" @click="next">
+            <span class="fs-4">❯</span>
+        </button>
+
+            <!-- Trilho do Slider -->
+            <div class="slider-track" :style="trackStyle" @transitionend="handleTransitionEnd">
+                <div v-for="(slide, index) in displaySlides" :key="index" class="slide-card shadow-sm" :class="{ 'active': currentIdx === index }" :style="{ backgroundImage: 'url(' + slide.img + ')' }">
+
+                </div>
+            </div>
+        </div>
+
+        <a href="#/galeria" class="btn_1">Ver toda Tragetoria dos Nossos estudante </a>
+
+
+
+    </div>
+
+
+
+
+
+
+    <div class="container faq-section p-3  padding_top pt-5">
         <div class="row">
             <div class="col-lg-7">
                 <h2 class="faq-title">Perguntas Frequentes</h2>

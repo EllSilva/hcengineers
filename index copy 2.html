@@ -4,229 +4,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Cursos - Dianguila</title>
+    <title>Bootstrap + Vue 2 Infinite Slider</title>
 
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Vue.js 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fcfcfc;
-            color: #0c121c;
-        }
-        
-        .main-container {
+            background-color: #f8f9fa;
+            overflow-x: hidden;
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
         }
         
-        .catalog-header h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            margin-bottom: 1rem;
-        }
-        
-        .catalog-header p {
-            color: #64748b;
-            font-size: 1.1rem;
-            max-width: 650px;
-            margin: 0 auto 3rem auto;
-        }
-        
-        .filter-card {
-            background: #ffffff;
-            border-radius: 35px;
-            padding: 35px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
-            max-width: 900px;
-            width: 100%;
-        }
-        /* Estilo Input */
-        
-        .search-wrapper {
+        .slider-window {
             position: relative;
-            margin-bottom: 1.2rem;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
         }
         
-        .search-icon {
+        .slider-track {
+            display: flex;
+            align-items: center;
             position: absolute;
-            left: 20px;
+            left: 0;
+            will-change: transform;
+        }
+        /* Card customizado usando classes do Bootstrap como base */
+        
+        .slide-card {
+            flex: 0 0 320px;
+            height: 400px;
+            margin: 0 15px;
+            border: none;
+            border-radius: 1rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            transform: scale(0.85);
+            filter: grayscale(100%);
+        }
+        /* Destaque do card central */
+        
+        .slide-card.active {
+            opacity: 1;
+            transform: scale(1.1);
+            filter: grayscale(0%);
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+        }
+        
+        .card-overlay {
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            color: white;
+        }
+        /* Botões flutuantes estilo Bootstrap */
+        
+        .btn-nav {
+            position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            color: #94a3b8;
             z-index: 10;
-        }
-        
-        .custom-input {
-            background-color: #f8faff !important;
-            border: none !important;
-            border-radius: 50px !important;
-            padding: 1.2rem 1.2rem 1.2rem 3.8rem !important;
-        }
-        /* Dropdowns Customizados */
-        
-        .dropdown-toggle::after {
-            display: none;
-        }
-        /* Remove a seta padrão do bootstrap */
-        
-        .custom-select-box {
-            background-color: #f8faff;
-            padding: 1rem 1.5rem;
-            border-radius: 18px;
-            width: 100%;
-            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            transition: 0.2s;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         
-        .custom-select-box:hover {
-            background-color: #f1f5f9;
+        .btn-prev {
+            left: 20px;
         }
         
-        .filter-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .filter-info i {
-            color: #3b82f6;
-            font-size: 0.9rem;
-        }
-        
-        .filter-info span {
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #1e293b;
-        }
-        
-        .dropdown-menu {
-            border-radius: 15px;
-            border: none;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            width: 100%;
-        }
-        
-        .dropdown-item {
-            border-radius: 8px;
-            font-size: 0.9rem;
-            padding: 10px 15px;
-        }
-        
-        .dropdown-item:active {
-            background-color: #3b82f6;
+        .btn-next {
+            right: 20px;
         }
     </style>
 </head>
 
 <body>
 
-    <div id="app" class="main-container">
-        <div class="container text-center">
+    <div id="app" class="container-fluid px-0">
+        <div class="slider-window">
 
-            <header class="catalog-header">
-                <h1>Catálogo de Cursos</h1>
-                <p>Explore o nosso catálogo de cursos. Filtre por categoria ou nível de dificuldade para encontrar a sua próxima aventura de aprendizado.</p>
-            </header>
+            <!-- Botões de Navegação (Bootstrap) -->
+            <button class="btn btn-light btn-nav btn-prev shadow" @click="prev">
+            <span class="fs-4">❮</span>
+        </button>
+            <button class="btn btn-light btn-nav btn-next shadow" @click="next">
+            <span class="fs-4">❯</span>
+        </button>
 
-            <div class="filter-card mx-auto">
-                <div class="search-wrapper">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" v-model="searchQuery" class="form-control custom-input" placeholder="Qual habilidade queres dominar hoje?">
-                </div>
-
-                <div class="row g-3">
-                    <div class="col-md-6 dropdown">
-                        <button class="custom-select-box dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <div class="filter-info">
-                                <i class="fa-solid fa-sliders"></i>
-                                <span>{{ selectedArea || 'Todas as Áreas' }}</span>
-                            </div>
-                            <i class="fa-solid fa-chevron-down text-muted small"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" @click.prevent="selectedArea = ''">Todas as Áreas</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li v-for="area in areas" :key="area">
-                                <a class="dropdown-item" href="#" @click.prevent="selectedArea = area">{{ area }}</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-6 dropdown">
-                        <button class="custom-select-box dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <div class="filter-info">
-                                <i class="fa-solid fa-arrow-up-wide-short"></i>
-                                <span>{{ selectedLevel || 'Todos os Níveis' }}</span>
-                            </div>
-                            <i class="fa-solid fa-chevron-down text-muted small"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" @click.prevent="selectedLevel = ''">Todos os Níveis</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li v-for="nivel in niveis" :key="nivel">
-                                <a class="dropdown-item" href="#" @click.prevent="selectedLevel = nivel">{{ nivel }}</a>
-                            </li>
-                        </ul>
+            <!-- Trilho do Slider -->
+            <div class="slider-track" :style="trackStyle" @transitionend="handleTransitionEnd">
+                <div v-for="(slide, index) in displaySlides" :key="index" class="slide-card shadow-sm" :class="{ 'active': currentIdx === index }" :style="{ backgroundImage: 'url(' + slide.img + ')' }">
+                    <div class="card-overlay">
+                        <h4 class="fw-bold mb-1">{{ slide.title }}</h4>
+                        <p class="small mb-0 opacity-75">{{ slide.desc }}</p>
+                        <button class="btn btn-primary btn-sm mt-3 w-50" v-if="currentIdx === index">Ver mais</button>
                     </div>
                 </div>
-
-                <div class="mt-4 small text-muted" v-if="searchQuery || selectedArea || selectedLevel">
-                    Filtrando por: <b>{{ searchQuery }}</b> | <b>{{ selectedArea }}</b> | <b>{{ selectedLevel }}</b>
-                </div>
-
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
     <script>
-        const {
-            createApp
-        } = Vue
-
-        createApp({
-            data() {
-                return {
-                    searchQuery: '',
-                    selectedArea: '',
-                    selectedLevel: '',
-                    // Dados que preenchem os selects
-                    areas: [
-                        'Desenvolvimento Web',
-                        'Data Science',
-                        'Design UI/UX',
-                        'Marketing Digital',
-                        'Cibersegurança',
-                        'Inteligência Artificial'
-                    ],
-                    niveis: [
-                        'Iniciante',
-                        'Intermediário',
-                        'Avançado',
-                        'Especialista'
-                    ]
+        new Vue({
+            el: '#app',
+            data: {
+                currentIdx: 3,
+                transitioning: true,
+                cardWidth: 350, // largura (320) + margens (15+15)
+                rawSlides: [{
+                    title: 'Tech Solutions',
+                    desc: 'Inovação em software',
+                    img: 'https://picsum.photos/id/1/400/600'
+                }, {
+                    title: 'Design Thinking',
+                    desc: 'Criatividade focada',
+                    img: 'https://picsum.photos/id/2/400/600'
+                }, {
+                    title: 'Cloud Data',
+                    desc: 'Segurança absoluta',
+                    img: 'https://picsum.photos/id/3/400/600'
+                }, {
+                    title: 'AI Future',
+                    desc: 'O amanhã agora',
+                    img: 'https://picsum.photos/id/4/400/600'
+                }],
+                displaySlides: []
+            },
+            computed: {
+                trackStyle() {
+                    // Centralização precisa usando a largura da janela
+                    const centerOffset = window.innerWidth / 2 - this.cardWidth / 2;
+                    const x = centerOffset - (this.currentIdx * this.cardWidth);
+                    return {
+                        transform: 'translateX(' + x + 'px)',
+                        transition: this.transitioning ? 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
+                    };
+                }
+            },
+            created() {
+                // Lógica de Clones para Loop Infinito
+                const startClones = this.rawSlides.slice(-3);
+                const endClones = this.rawSlides.slice(0, 3);
+                this.displaySlides = [...startClones, ...this.rawSlides, ...endClones];
+            },
+            methods: {
+                next() {
+                    if (!this.transitioning) return;
+                    this.currentIdx++;
+                },
+                prev() {
+                    if (!this.transitioning) return;
+                    this.currentIdx--;
+                },
+                handleTransitionEnd() {
+                    // Teleporte invisível (Loop)
+                    if (this.currentIdx >= this.displaySlides.length - 3) {
+                        this.transitioning = false;
+                        this.currentIdx = 3;
+                        this.$nextTick(() => {
+                            setTimeout(() => {
+                                this.transitioning = true;
+                            }, 50);
+                        });
+                    } else if (this.currentIdx <= 2) {
+                        this.transitioning = false;
+                        this.currentIdx = this.displaySlides.length - 6;
+                        this.$nextTick(() => {
+                            setTimeout(() => {
+                                this.transitioning = true;
+                            }, 50);
+                        });
+                    }
                 }
             }
-        }).mount('#app')
+        });
     </script>
+
 </body>
 
 </html>

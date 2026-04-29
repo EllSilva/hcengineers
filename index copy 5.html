@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Premium Full Black Overlay</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+         :root {
+            --accent-color: #3b82f6;
+            --glass-black: rgba(0, 0, 0, 0.75);
+            /* Preto Transparente */
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: var(--font-main);
+            background: #000;
+            overflow: hidden;
+        }
+        /* --- CONTAINER DO SLIDER --- */
+        
+        .carousel-item {
+            height: 100vh;
+            width: 100%;
+            background: #000;
+            /* Fundo de segurança preto */
+            position: relative;
+        }
+        /* --- IMAGEM COM OVERLAY PRETO --- */
+        
+        .img-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .img-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Camada preta transparente (Overlay) */
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
+            z-index: 1;
+        }
+        
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1);
+            transition: transform 10s ease;
+        }
+        /* Efeito Zoom In na Imagem */
+        
+        .carousel-item.active img {
+            transform: scale(1.15);
+        }
+        /* --- CARD FLUTUANTE (BLACK TRANSPARENT GLASS) --- */
+        
+        .glass-card {
+            position: absolute;
+            bottom: 12%;
+            left: 6%;
+            width: 90%;
+            max-width: 500px;
+            background: var(--glass-black);
+            /* Fundo preto transparente */
+            backdrop-filter: blur(15px);
+            /* Efeito de vidro */
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .icon-badge {
+            background: rgba(59, 130, 246, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+        }
+        
+        .card-title {
+            color: #fff;
+            font-weight: 800;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+        
+        .card-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        /* --- BARRA DE PROGRESSO (ESTILO DA IMAGEM) --- */
+        
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 25px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-color);
+            width: 0%;
+        }
+        
+        .carousel-item.active .progress-bar {
+            animation: progressAnimation 8s linear forwards;
+        }
+        
+        @keyframes progressAnimation {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 100%;
+            }
+        }
+        /* --- INDICADORES --- */
+        
+        .carousel-indicators {
+            bottom: 40px;
+            justify-content: flex-end;
+            right: 6%;
+            margin: 0;
+        }
+        
+        .carousel-indicators [button] {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            margin: 0 5px;
+        }
+        
+        .carousel-indicators .active {
+            background-color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 30px;
+                bottom: 10%;
+                left: 5%;
+                width: 90%;
+            }
+            .card-title {
+                font-size: 1.5rem;
+            }
+            .carousel-control-prev,
+            .carousel-control-next {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <div id="mainSlider" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="8000">
+
+            <div class="carousel-indicators">
+                <button v-for="(slide, index) in slides" :key="'ind-'+index" type="button" data-bs-target="#mainSlider" :data-bs-slide-to="index" :class="{ active: index === 0 }"></button>
+            </div>
+
+            <div class="carousel-inner">
+                <div v-for="(slide, index) in slides" :key="'slide-'+index" class="carousel-item" :class="{ active: index === 0 }">
+
+                    <div class="img-container">
+                        <img :src="slide.image" alt="Background">
+                    </div>
+
+                    <div class="glass-card">
+                        <div class="icon-badge">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path></svg>
+                        </div>
+                        <h1 class="card-title">{{ slide.title }}</h1>
+                        <p class="card-text">{{ slide.description }}</p>
+
+                        <div class="progress-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                slides: [{
+                    image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2084',
+                    title: 'Garantia de Sucesso',
+                    description: 'Nossa consultoria de alta performance garante que 92% dos nossos alunos conquistem posições globais em menos de 6 meses.'
+                }, {
+                    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071',
+                    title: 'Metodologia Kaizen',
+                    description: 'A evolução contínua levada a sério. Mentoria direta com especialistas que dominam o mercado internacional.'
+                }]
+            }
+        });
+    </script>
+
+</body>
+
+</html>

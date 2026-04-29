@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Dianguila</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        /* Header */
+        
+        .blog-header {
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .blog-logo {
+            color: #0d6efd;
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-subtitle {
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* Barra de Busca */
+        
+        .search-container {
+            max-width: 900px;
+            margin: 2rem auto;
+        }
+        
+        .search-input {
+            border-radius: 50px;
+            padding-left: 2.5rem;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #adb5bd;
+        }
+        /* Card de Destaque (Artemis II) */
+        
+        .featured-card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            background: white;
+            margin-bottom: 3rem;
+        }
+        
+        .featured-img {
+            height: 100%;
+            min-height: 300px;
+            object-fit: cover;
+        }
+        
+        .badge-tech {
+            background-color: #f1f3f5;
+            color: #495057;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+        /* Grid de Posts */
+        
+        .post-card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            height: 100%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+        }
+        
+        .post-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .post-card img {
+            border-radius: 15px 15px 0 0;
+            object-fit: cover;
+        }
+        
+        .post-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+        /* Estilo corrigido para a imagem do autor */
+        
+        .author-img {
+            width: 35px;
+            /* Define uma largura fixa pequena */
+            height: 35px;
+            /* Define uma altura fixa igual à largura */
+            object-fit: cover;
+            /* Garante que a foto não fique esticada */
+            border-radius: 50%;
+            /* Deixa a imagem perfeitamente redonda */
+            margin-right: 10px;
+            /* Espaçamento entre a foto e o nome */
+            display: inline-block;
+            /* Garante que ela se comporte bem na linha */
+        }
+        /* Ajuste no container do autor para alinhar verticalmente */
+        
+        .author-info {
+            display: flex;
+            align-items: center;
+            /* Alinha o texto ao centro da imagem */
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        
+        .read-more {
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #0d6efd;
+        }
+        /* Responsividade Customizada */
+        
+        @media (max-width: 768px) {
+            .featured-img {
+                min-height: 200px;
+            }
+            .blog-logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+
+        <!-- Header Section -->
+        <header class="blog-header">
+            <h1 class="blog-logo">Blog Dianguila</h1>
+            <p class="blog-subtitle">Partilhamos conhecimento, tendências e histórias sobre tecnologia para impulsionar o seu futuro profissional em Angola.</p>
+        </header>
+
+        <!-- Search & Filter -->
+        <div class="search-container">
+            <div class="row g-2">
+                <div class="col-md-9 position-relative">
+                    <i class="fa fa-search search-icon"></i>
+                    <input type="text" class="form-control search-input shadow-sm p-3" v-model="searchQuery" placeholder="    Buscar artigos...">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select shadow-sm p-3 border-0" style="border-radius: 50px;">
+                    <option>Todas as Tags</option>
+                    <option>Tecnologia</option>
+                    <option>IA</option>
+                </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Post -->
+        <div class="featured-card shadow-sm">
+            <div class="row g-0">
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=800" class="img-fluid featured-img w-100" alt="Artemis II">
+                </div>
+                <div class="col-lg-6 p-4 p-md-5 d-flex flex-column justify-content-center">
+                    <div class="mb-3 d-flex justify-content-between align-items-center">
+                        <span class="badge-tech">Tecnologia</span>
+                        <small class="text-muted"><i class="far fa-clock"></i> 3 min de leitura</small>
+                    </div>
+                    <h2 class="fw-bold mb-3">Dia 5 do voo da Artemis II: Tripulação testa trajes espaciais e se prepara para sobrevoo lunar.</h2>
+                    <div class="author-info mb-3">
+                        <img src="https://ui-avatars.com/api/?name=Eugenio+Nelson&background=random" class="author-img">
+                        <span>Eugênio Nelson • 04 abr, 2026</span>
+                    </div>
+                    <p class="text-muted">Notas do Editor: O blog foi atualizado para refletir que a atividade de despressurização da cabine foi corrigida para as 23h00 EDT...</p>
+                    <a href="#" class="btn btn-primary btn-lg mt-3 w-fit" style="width: fit-content; border-radius: 10px;">
+                    Ler Artigo Completo <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Grid -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+            <div class="col" v-for="(post, index) in filteredPosts" :key="index">
+                <div class="card post-card p-2">
+                    <img :src="post.image" class="card-img-top" :alt="post.title">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge-tech small">{{ post.tag }}</span>
+                            <small class="text-muted">{{ post.readTime }}</small>
+                        </div>
+                        <h5 class="post-title mb-3">{{ post.title }}</h5>
+                        <div class="author-info mb-3">
+                            <img :src="post.authorImg" class="author-img">
+                            <span>{{ post.author }} • {{ post.date }}</span>
+                        </div>
+                        <p class="text-muted small flex-grow-1">{{ post.excerpt }}</p>
+                        <div class="text-end mt-2">
+                            <a href="#" class="read-more">Ler artigo <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vue.js 3 Script -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const {
+            createApp
+        } = Vue
+
+        createApp({
+            data() {
+                return {
+                    searchQuery: '',
+                    posts: [{
+                        title: "A NASA responde às suas perguntas mais urgentes sobre a Artemis II",
+                        tag: "Tecnologia",
+                        readTime: "4 min",
+                        author: "Eugênio Nelson",
+                        date: "04 abr, 2026",
+                        authorImg: "https://ui-avatars.com/api/?name=EN&background=0d6efd&color=fff",
+                        excerpt: "Nota do editor: Esta matéria foi atualizada às 12h40 EDT (horário de Luanda) do domingo...",
+                        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400"
+                    }, {
+                        title: "O que é um agente de IA?",
+                        tag: "Tecnologia",
+                        readTime: "5 min",
+                        author: "Eugênio Nelson",
+                        date: "03 abr, 2026",
+                        authorImg: "https://ui-avatars.com/api/?name=EN&background=0d6efd&color=fff",
+                        excerpt: "O guia sobre agentes de IA: Uma breve explicação dos agentes de IA e como eles funcionam...",
+                        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=400"
+                    }, {
+                        title: "Crie a sua Primeira IA com TensorFlow e Keras (Aula 1)",
+                        tag: "Tecnologia",
+                        readTime: "8 min",
+                        author: "Eugênio Nelson",
+                        date: "28 mar, 2026",
+                        authorImg: "https://ui-avatars.com/api/?name=EN&background=0d6efd&color=fff",
+                        excerpt: "Introdução ao mundo incrível da Inteligência Artificial, construindo seu primeiro modelo...",
+                        image: "https://images.unsplash.com/photo-1509228463551-3146b28031a4?auto=format&fit=crop&q=80&w=400"
+                    }, {
+                        title: "A Arquitetura do Caos: Da Queda da Cloudflare à Fragilidade",
+                        tag: "Tecnologia",
+                        readTime: "6 min",
+                        author: "Eugênio Nelson",
+                        date: "28 mar, 2026",
+                        authorImg: "https://ui-avatars.com/api/?name=EN&background=0d6efd&color=fff",
+                        excerpt: "Uma análise profunda sobre como sistemas globais podem falhar e o que aprendemos com isso...",
+                        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=400"
+                    }, {
+                        title: "Alerta Android 15: O Fim do setStatusBarColor",
+                        tag: "Tecnologia",
+                        readTime: "4 min",
+                        author: "Eugênio Nelson",
+                        date: "27 mar, 2026",
+                        authorImg: "https://ui-avatars.com/api/?name=EN&background=0d6efd&color=fff",
+                        excerpt: "Android 15 muda a forma como as barras de sistema funcionam. Saiba como se preparar...",
+                        image: "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?auto=format&fit=crop&q=80&w=400"
+                    }, {
+                        title: "O que é um build?",
+                        tag: "Tecnologia",
+                        readTime: "3 min",
+                        author: "Eugênio Nelson",
+                        date: "26 mar, 2026",
+                        authorImg: "https://ui-avatars.com/api/?name=EN&background=0d6efd&color=fff",
+                        excerpt: "Os aplicativos que você usa passam por um processo de construção chamado build. Entenda o que é...",
+                        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=400"
+                    }]
+                }
+            },
+            computed: {
+                filteredPosts() {
+                    return this.posts.filter(post =>
+                        post.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+                    )
+                }
+            }
+        }).mount('#app')
+    </script>
+
+</body>
+
+</html>

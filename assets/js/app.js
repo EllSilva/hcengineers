@@ -45,11 +45,17 @@ const routes = [
     { path: '/contato', component: { template: '<p-contato></p-contato>' } }
 ]
 
-const router = new Router({ routes })
+const router = new Router({
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        return { x: 0, y: 0 }
+    }
+})
 
 new Vue({
     router,
-    data: {}
+    data: {},
+
 }).$mount('#app')
 
 ;

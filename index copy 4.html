@@ -4,193 +4,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - Fundação Bradesco (Vue 2)</title>
+    <title>Slider Fullscreen Vue.js 2</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 
     <style>
-         :root {
-            --bradesco-pink: #f52d5e;
+        /* Reset para ocupar tela cheia */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            color: #333;
-        }
-        
-        .faq-section {
-            padding: 60px 0;
-        }
-        
-        .faq-title {
-            font-weight: 700;
-            font-size: 2.2rem;
-            margin-bottom: 2rem;
-        }
-        /* Item da FAQ */
-        
-        .faq-item {
-            border-bottom: 1px solid #eee;
-        }
-        
-        .faq-header {
+        html,
+        body,
+        #app {
             width: 100%;
-            padding: 20px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: none;
-            border: none;
-            cursor: pointer;
-            text-align: left;
-            font-size: 1.1rem;
-            color: #333;
-        }
-        
-        .faq-header:hover {
-            color: var(--bradesco-pink);
-        }
-        /* Ícone de seta com rotação */
-        
-        .faq-header i {
-            color: var(--bradesco-pink);
-            transition: transform 0.3s ease;
-        }
-        
-        .icon-active {
-            transform: rotate(90deg);
-        }
-        /* Resposta com animação */
-        
-        .faq-answer {
-            max-height: 0;
+            height: 100%;
             overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
-            color: #666;
-            line-height: 1.6;
+            font-family: Arial, sans-serif;
         }
         
-        .is-open {
-            max-height: 300px;
-            /* Suficiente para o texto */
-            padding-bottom: 20px;
-        }
-        
-        .btn-all {
-            color: var(--bradesco-pink);
-            font-weight: 700;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-        }
-        /* Card Rosa Lateral */
-        
-        .cta-card {
-            background-color: var(--bradesco-pink);
-            border-radius: 8px;
-            padding: 4rem 3rem;
-            color: white;
+        .slider-container {
             position: relative;
-            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
         }
+        /* Slides */
         
-        .cta-card p {
-            font-size: 1.6rem;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .btn-cta {
-            border: 2px solid white;
-            color: white;
-            border-radius: 50px;
-            padding: 8px 25px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            position: relative;
-            z-index: 2;
-            transition: 0.3s;
-        }
-        
-        .btn-cta:hover {
-            background: white;
-            color: var(--bradesco-pink);
-        }
-        
-        .wink-icon {
+        .slide {
             position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 7rem;
-            font-family: monospace;
-            opacity: 0.8;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Overlay de Texto */
+        
+        .info {
+            position: absolute;
+            bottom: 15%;
+            left: 5%;
+            color: white;
+            z-index: 5;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .info h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .info p {
+            font-size: 1.2rem;
+        }
+        /* Botões de Navegação */
+        
+        .btn {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .prev {
+            left: 0;
+        }
+        
+        .next {
+            right: 0;
+        }
+        /* Indicadores */
+        
+        .dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+        
+        .dot {
+            width: 14px;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        
+        .dot.active {
+            background: white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
     </style>
 </head>
 
 <body>
 
-    <div id="app" class="container faq-section">
-        <div class="row">
-            <div class="col-lg-7">
-                <h2 class="faq-title">Perguntas Frequentes</h2>
-
-                <div class="faq-list">
-                    <div v-for="(item, index) in faqItems" :key="index" class="faq-item">
-                        <button @click="toggle(index)" class="faq-header">
-                        <span>{{ item.pergunta }}</span>
-                        <i class="bi bi-chevron-right" :class="{ 'icon-active': activeIndex === index }"></i>
-                    </button>
-
-                        <div class="faq-answer" :class="{ 'is-open': activeIndex === index }">
-                            {{ item.resposta }}
-                        </div>
-                    </div>
+    <div id="app">
+        <div class="slider-container">
+            <div v-for="(slide, index) in slides" :key="index" class="slide" :class="{ active: currentIndex === index }">
+                <img :src="slide.url" :alt="slide.title">
+                <div class="info">
+                    <h1>{{ slide.title }}</h1>
+                    <p>{{ slide.desc }}</p>
                 </div>
-
-                <a href="#" class="btn-all">Mostrar todas as perguntas</a>
             </div>
 
-            <div class="col-lg-5 ps-lg-5">
-                <div class="cta-card shadow">
-                    <p>Quer iniciar a sua jornada de conhecimento?<br><strong>É grátis!</strong></p>
-                    <a href="#" class="btn-cta">Começar agora</a>
-                    <span class="wink-icon">;)</span>
-                </div>
+            <button class="btn prev" @click="prevSlide">&#10094;</button>
+            <button class="btn next" @click="nextSlide">&#10095;</button>
+
+            <div class="dots">
+                <span v-for="(_, index) in slides" :key="'dot-' + index" class="dot" :class="{ active: currentIndex === index }" @click="currentIndex = index"></span>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-
     <script>
         new Vue({
             el: '#app',
-            data: function() {
-                return {
-                    activeIndex: -1,
-                    faqItems: [{
-                        pergunta: "Onde está localizado o certificado?",
-                        resposta: "Seu certificado fica disponível na seção 'Meus Cursos' no menu lateral, logo após você atingir a nota mínima e concluir o tempo de estudo exigido."
-                    }, {
-                        pergunta: "Como realizar a matrícula nos cursos?",
-                        resposta: "Navegue pelo catálogo de cursos, clique no curso desejado e selecione o botão 'Quero me matricular'. Você terá acesso imediato às aulas."
-                    }, {
-                        pergunta: "Ao finalizar um curso, recebo um certificado?",
-                        resposta: "Sim. A Fundação Bradesco oferece certificados digitais gratuitos para todos os cursos da Escola Virtual, desde que o aluno complete os requisitos de avaliação."
-                    }]
-                }
+            data: {
+                currentIndex: 0,
+                timer: null,
+                slides: [{
+                    url: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1920',
+                    title: 'Natureza Viva',
+                    desc: 'Cenários deslumbrantes ao redor do mundo.'
+                }, {
+                    url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920',
+                    title: 'Exploração',
+                    desc: 'Descubra novos horizontes.'
+                }, {
+                    url: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=1920',
+                    title: 'Tranquilidade',
+                    desc: 'Momentos de paz em meio ao verde.'
+                }]
             },
             methods: {
-                toggle: function(index) {
-                    // Se clicar no que já está aberto, fecha tudo (-1), senão abre o novo índice
-                    this.activeIndex = this.activeIndex === index ? -1 : index;
+                nextSlide() {
+                    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+                },
+                prevSlide() {
+                    this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+                },
+                startAutoPlay() {
+                    this.timer = setInterval(this.nextSlide, 5000);
+                },
+                stopAutoPlay() {
+                    clearInterval(this.timer);
                 }
+            },
+            mounted() {
+                this.startAutoPlay();
+            },
+            beforeDestroy() {
+                // Limpa o timer para evitar vazamento de memória ao destruir o componente
+                this.stopAutoPlay();
             }
         });
     </script>

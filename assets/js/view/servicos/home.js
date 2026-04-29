@@ -37,64 +37,57 @@ export default {
                 titulo: 'Medições e Orçamentos - MO',
                 preco: '49.900',
                 descricao: 'Descrição do curso...',
-                imagem: 'https://picsum.photos/400/200?random=1'
+                imagem: './assets/img/gallery/1.jpeg'
             }, {
                 id: 2,
                 categoria: 'Engenharia Civil',
                 titulo: 'Fiscalização de Obras - FO',
                 preco: '32.900',
                 descricao: 'Descrição do curso...',
-                imagem: 'https://picsum.photos/400/200?random=2'
+                imagem: './assets/img/gallery/2.jpeg'
             }, {
                 id: 3,
                 categoria: "Arquitetura",
                 titulo: 'AutoCAD 2D',
                 preco: '32.900',
                 descricao: 'Descrição do curso...',
-                imagem: 'https://picsum.photos/400/200?random=3'
+                imagem: './assets/img/gallery/AutoCAD-Civil-2D.png'
             }, {
                 id: 4,
                 categoria: 'Engenharia Civil',
                 titulo: 'Ganttproject',
                 preco: '33.000',
                 descricao: 'Descrição do curso...',
-                imagem: 'https://picsum.photos/400/200?random=4'
+                imagem: './assets/img/gallery/012.jpeg'
             }, {
                 id: 5,
                 categoria: 'Dimensionamento',
                 titulo: 'Dimensionamento de Estruturas metálicas com Softwate',
                 preco: '40.000',
                 descricao: 'Descrição do curso...',
-                imagem: 'https://picsum.photos/400/200?random=5'
+                imagem: './assets/img/gallery/011.jpeg'
             }, {
                 id: 6,
                 categoria: "Dimensionamento",
                 titulo: 'Topografia',
                 preco: '45.000',
                 descricao: 'Descrição do curso...',
-                imagem: 'https://picsum.photos/400/200?random=6'
+                imagem: './assets/img/gallery/8.jpeg'
             }, {
                 id: 7,
                 categoria: "Arquitetura",
                 titulo: 'Revit + Lumion',
                 preco: '29.000',
                 descricao: 'Descrição do curso...',
-                imagem: 'https://picsum.photos/400/200?random=7'
+                imagem: './assets/img/gallery/111.jpeg'
             }, {
                 id: 8,
                 categoria: "Dimensionamento",
                 titulo: 'SIG - Produção de mapas com QGIS',
                 preco: '15.000',
                 descricao: 'Descrição do curso...',
-                imagem: 'https://picsum.photos/400/200?random=8'
-            }, {
-                id: 9,
-                categoria: 'Engenharia Civil',
-                titulo: 'Civil 3D',
-                preco: '12.000',
-                descricao: 'Descrição do curso...',
-                imagem: 'https://picsum.photos/400/200?random=9'
-            }, ]
+                imagem: './assets/img/gallery/008.jpeg'
+            }, ],
         }
 
     },

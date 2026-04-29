@@ -1,0 +1,467 @@
+<div>
+
+    <section class="principal">
+        <div class="slider-container">
+            <div id="mainCarousel" class="carousel slide carousel-fade custom-slider" data-bs-ride="carousel">
+
+                <div class="carousel-indicators">
+                    <button v-for="(slide, index) in slides" :key="'ind-'+index" type="button" data-bs-target="#mainCarousel" :data-bs-slide-to="index" :class="{ active: index === 0 }">
+            </button>
+                </div>
+
+                <div class="carousel-inner">
+                    <div v-for="(slide, index) in slides" :key="'slide-'+index" class="carousel-item" :class="{ active: index === 0 }">
+
+
+                        <div class="img-container">
+                            <img :src="slide.image" class="w-100" :alt="slide.title">
+                        </div>
+
+
+
+                        <div class="glass-card shadow-lg">
+                            <div class="d-flex align-items-start">
+                                <div class="icon-wrapper me-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"></path><path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5"></path></svg>
+                                </div>
+                                <div class="content">
+                                    <h5 class="card-title">{{ slide.title }}</h5>
+                                    <p class="card-text">{{ slide.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 20px;"></span>
+        </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="width: 20px;"></span>
+        </button>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="principal">
+
+        <div class=" hero-section_princ princ ">
+            <div class="content-container_princ">
+                <div class="badge p-2">Educação</div>
+
+                <h1 style="color: white;">Dê o próximo passo rumo à <span>excelência.</span></h1>
+
+                <p class="description">
+                    Oferecemos programas de formação personalizados e planos de formação adaptados a diversas necessidades.
+
+
+
+                    <div class="btn-group">
+                        <a href="#/cursos" class="btn_1">Ver Curso </a>
+                        <a @click="abrirModal" class="btn_2">Inscreva-se Agora </a>
+                    </div>
+            </div>
+
+            <div class="image-container"></div>
+
+
+        </div>
+    </section>
+
+    <!-- learning part start Formação progressiva-->
+    <section class="learning_part">
+        <div class="container">
+            <div class="row align-items-sm-center align-items-lg-stretch">
+                <div class="col-md-7 col-lg-7">
+
+
+                    <div class="slider-container">
+                        <div id="mainCarousel" class="carousel slide carousel-fade custom-slider" data-bs-ride="carousel">
+
+                            <div class="carousel-indicators">
+                                <button v-for="(slide, index) in slides" :key="'ind-'+index" type="button" data-bs-target="#mainCarousel" :data-bs-slide-to="index" :class="{ active: index === 0 }">
+            </button>
+                            </div>
+
+                            <div class="carousel-inner">
+                                <div v-for="(slide, index) in slides" :key="'slide-'+index" class="carousel-item" :class="{ active: index === 0 }">
+
+                                    <img :src="slide.image" class="w-100" :alt="slide.title">
+
+                                    <div class="glass-card shadow-lg">
+                                        <div class="d-flex align-items-start">
+                                            <div class="icon-wrapper me-3">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"></path><path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5"></path></svg>
+                                            </div>
+                                            <div class="content">
+                                                <h5 class="card-title">{{ slide.title }}</h5>
+                                                <p class="card-text">{{ slide.description }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 20px;"></span>
+        </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="width: 20px;"></span>
+        </button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-md-5 col-lg-5">
+                    <div class="learning_member_text">
+                        <h5>Sobre nós</h5>
+                        <h2>ACADEMIA HCENGINEERS</h2>
+                        <p>Nossos cursos são desenvolvidos por especialistas do mercado angolano, combinando teoria e prática para garantir que nossos alunos estejam preparados para os desafios do setor de construção em Angola.</p>
+                        <ul>
+                            <li><span class="ti-book"></span>Instrutores altamente qualificados e experientes no mercado profissional</li>
+                            <li><span class="ti-pencil-alt"></span>Material didático atualizado, completo e orientado para a prática</li>
+                            <li><span class="ti-receipt"></span>Certificação reconhecida e validada pelo INEFOP
+                            </li>
+                        </ul>
+                        <a href="#" class="btn_1">Leia mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- learning part end-->
+
+    <!-- feature_part start-->
+    <section class="feature_part">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-xl-3 align-self-center">
+                    <div class="single_feature_text ">
+                        <h2>Rumo ao <br> Sucesso</h2>
+                        <p>Um percurso estruturado e focado na prática para garantir que você alcance os seus objetivos profissionais. </p>
+                        <a href="#" class="btn_1">Saber mais</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="single_feature">
+                        <div class="single_feature_part">
+                            <span class="single_feature_icon"><i class="ti-layers"></i></span>
+                            <h4>Defina o Caminho</h4>
+                            <p>Selecione um curso individual ou siga um roadmap de carreira desenhado por especialistas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="single_feature">
+                        <div class="single_feature_part">
+                            <span class="single_feature_icon"><i class="bi bi-person-workspace"></i></span>
+                            <h4>Mentoria</h4>
+                            <p>Receba apoio de especialistas para esclarecer dúvidas e alcançar os seus objetivos.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="single_feature">
+                        <div class="single_feature_part single_feature_part_2">
+                            <span class="single_service_icon style_icon"><i class="bi bi-mortarboard-fill"></i></span>
+                            <h4>Certificação</h4>
+                            <p>Ao concluir o curso, receba um diploma certificado pelo INEFOP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- upcoming_event part start-->
+
+
+    <!-- member_counter counter start -->
+    <section class="member_counter">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6 col-6">
+                    <div class="single_member_counter">
+                        <span class="counter">24</span>
+                        <h4>Professores</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-6">
+                    <div class="single_member_counter">
+                        <span class="counter">+160</span>
+                        <h4>Estudantes Ativos</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-6">
+                    <div class="single_member_counter">
+                        <span class="counter">1020</span>
+                        <h4>Certificação</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-6">
+                    <div class="single_member_counter">
+                        <span class="counter">24/7 </span>
+                        <h4>Suporte</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- member_counter counter end -->
+
+
+
+    <!--::review_part start::-->
+    <section class="special_cource padding_top">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-5">
+                    <div class="section_tittle text-center">
+                        <p>Career</p>
+                        <h2>Planos de Formação</h2>
+                    </div>
+                </div>
+            </div>
+            <div class=" ">
+                <div class="row g-4">
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card custom-card text-start">
+                            <div class="card-img-wrapper">
+                                <span class="badge-elite">Certificados</span>
+                                <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&q=80&w=500" class="card-img-top" alt="Data Science">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Engenharia Civil</h5>
+                                <p class="card-text">Aprenda a projetar, construir e gerir obras com eficiência. Domine cálculo estrutural, desenho técnico e gestão de projetos...</p>
+
+                                <div class="info-row">
+                                    <div class="info-item">
+                                        <i class="ti-book fs-6"></i> 3 CURSOS
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="bi bi-mortarboard-fill fs-6"></i> CERTIFICADOS
+                                    </div>
+                                </div>
+
+                                <a href="#" class="btn btn-custom w-100">Explorar planos de formação</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card custom-card text-start">
+                            <div class="card-img-wrapper">
+                                <span class="badge-elite">Certificados</span>
+                                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=500" class="card-img-top" alt="Frontend">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Arquitetura</h5>
+                                <p class="card-text">Aprenda a projetar espaços funcionais e esteticamente atrativos. Domine desenho arquitetônico, modelação 3D...</p>
+
+                                <div class="info-row">
+                                    <div class="info-item">
+                                        <i class="ti-book fs-6"></i> 4 CURSOS
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="bi bi-mortarboard-fill fs-6"></i> CERTIFICADOS
+                                    </div>
+                                </div>
+
+                                <a href="#" class="btn btn-custom w-100">Explorar planos de formação</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card custom-card text-start">
+                            <div class="card-img-wrapper">
+                                <span class="badge-elite">Certificados</span>
+                                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=500" class="card-img-top" alt="Cybersecurity">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Dimensionamento</h5>
+                                <p class="card-text">Aprenda a calcular e definir as dimensões ideais de estruturas e sistemas. Domine fundamentos de cálculo técnico...</p>
+
+                                <div class="info-row">
+                                    <div class="info-item">
+                                        <i class="ti-book fs-6 tx-curso"></i> 113 CURSOS
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="bi bi-mortarboard-fill fs-6"></i> CERTIFICADOS
+                                    </div>
+                                </div>
+
+                                <a href="#" class="btn btn-custom w-100">Explorar planos de formação</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--::blog_part end::-->
+    <!--::review_part start::-->
+    <section class="special_cource padding_top fundo_destaque">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-5">
+                    <div class="section_tittle text-center">
+                        <p>popular courses</p>
+                        <h2>Cursos em Destaque</h2>
+                    </div>
+                </div>
+            </div>
+            <div class=" ">
+                <div class="row g-4">
+
+
+                    <div v-for="curso in cursos" :key="curso.id" class="col-12 col-sm-6 col-lg-3">
+                        <div class="card shadow-sm h-100">
+                            <img :src="curso.imagem" class="card-img-top" :alt="curso.titulo">
+
+                            <div class="card-body d-flex flex-column">
+                                <div class="mb-3">
+                                    <span class="badge badge-category bg-light text-dark me-1">{{ curso.categoria }}</span>
+                                </div>
+
+                                <h5 class="card-title fw-bold mb-2" style="font-size: 1.1rem;">{{ curso.titulo }}</h5>
+
+                                <div class="mb-2">
+                                    <small class="text-warning">★★★★★</small>
+                                    <small class="text-muted ms-1" style="font-size: 0.75rem;">(1 avaliações)</small>
+                                </div>
+
+                                <p class="card-text description-truncate mb-4">
+                                    {{ curso.descricao }}
+                                </p>
+
+                                <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
+                                    <span class="price-text">{{ curso.preco }}Kz</span>
+                                    <a href="#" class="btn-view">Ver Curso &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--::blog_part end::-->
+
+
+
+    <!-- learning part start-->
+    <section class="advance_feature learning_part">
+        <div class="container">
+            <div class="row align-items-sm-center align-items-xl-stretch">
+                <div class="col-md-6 col-lg-6">
+                    <div class="learning_member_text">
+                        <h5> Planos de Formação</h5>
+                        <h2>Sequências de cursos preparadas para você se capacitar.</h2>
+                        <p>Construa sua carreira com o passo a passo dos Planos de Formação que melhor se adaptam aos seus objetivos, desenvolva competências sólidas e conquiste o seu espaço no mercado de trabalho.</p>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                <div class="learning_member_text_iner">
+                                    <span class="bi bi-graph-up-arrow"></span>
+                                    <h4>Formação progressiva</h4>
+                                    <p>Aprenda de forma organizada e evolua continuamente nas suas competências.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                <div class="learning_member_text_iner">
+                                    <span class="ti-stamp"></span>
+                                    <h4>Resultados práticos</h4>
+                                    <p>Desenvolva habilidades práticas e esteja preparado para desafios reais.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="learning_img">
+                        <img src="./assets/img/advance_feature_img.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- learning part end-->
+
+
+    <div class="container faq-section p-3">
+        <div class="row">
+            <div class="col-lg-7">
+                <h2 class="faq-title">Perguntas Frequentes</h2>
+
+                <div class="faq-list">
+                    <div v-for="(item, index) in faqItems" :key="index" class="faq-item">
+                        <button @click="toggle(index)" class="faq-header">
+                        <span>{{ item.pergunta }}</span>
+                        <i class="bi bi-chevron-right" :class="{ 'icon-active': activeIndex === index }"></i>
+                    </button>
+
+                        <div class="faq-answer" :class="{ 'is-open': activeIndex === index }">
+                            {{ item.resposta }}
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="btn-all">Mostrar todas as perguntas</a>
+            </div>
+
+            <div class="col-lg-5 ps-lg-5">
+                <div class="cta-card shadow">
+                    <p><strong>Precisa de ajuda?</strong><br>Nossa equipa está pronta para responder no WhatsApp</p>
+                    <a href="#" class="btn-cta">Começar agora</a>
+                    <span class="wink-icon">;)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="bg-light d-flex justify-content-center align-items-center  modalexx">
+
+
+
+        <!-- BACKDROP COM ANIMAÇÃO -->
+        <transition name="backdrop-fade">
+            <div class="backdrop" v-if="mostrarModal" class="modal-backdrop fade show" @click="fecharModal"> </div>
+        </transition>
+
+        <!-- MODAL COM ANIMAÇÃO -->
+        <transition name="modal-fade">
+            <div v-if="mostrarModal" class="modal d-block" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content shadow-lg rounded-3">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title">Inscrição</h5>
+                            <button class="btn-close" @click="fecharModal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <p-formulario></p-formulario>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </transition>
+
+    </div>
+
+
+</div>
