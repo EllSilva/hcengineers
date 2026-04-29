@@ -473,7 +473,7 @@
                         
                         @media (max-width: 776px) {
                             .principal {
-                                margin-top: 10%;
+                                margin-top: 8%;
                             }
                         }
                         /* FIM DA AREA DE CURSO */
@@ -1072,9 +1072,9 @@
                             opacity: 1;
                         }
                         
-                        @media (max-width: 576px) {
+                        @media (max-width: 776px) {
                             .slider-container {
-                                padding: 10px;
+                                padding: 5px;
                             }
                         }
                         
