@@ -6,6 +6,7 @@ export default {
             mostrarModal: false,
             activeIndex: -1,
 
+            isMobile: false,
             currentIdx: 3,
             transitioning: true,
             cardWidth: 350, // largura (320) + margens (15+15)
@@ -76,13 +77,6 @@ export default {
                 descricao: 'Descrição do curso...',
                 imagem: './assets/img/gallery/AutoCAD-Civil-2D.png'
             }, {
-                id: 4,
-                categoria: 'Engenharia Civil',
-                titulo: 'Ganttproject',
-                preco: '33.000',
-                descricao: 'Descrição do curso...',
-                imagem: './assets/img/gallery/012.jpeg'
-            }, {
                 id: 5,
                 categoria: 'Dimensionamento',
                 titulo: 'Dimensionamento de Estruturas metálicas com Softwate',
@@ -114,7 +108,7 @@ export default {
 
             slides: [{
                 image: './assets/img/gallery/001.jpeg',
-                title: 'Dê o próximo passo rumo à excelência.',
+                title: 'Rumo à excelência.',
                 description: 'Oferecemos programas de formação personalizados e planos de formação adaptados a diversas necessidades.'
             }, {
                 image: './assets/img/gallery/002.jpeg',
@@ -128,7 +122,76 @@ export default {
                 image: './assets/img/gallery/43.jpeg',
                 title: 'Metodologia Ágil',
                 description: 'Aprenda com projetos reais e mentoria focada em alta performance.'
-            }]
+            }],
+
+            currentIndex: 0,
+            itensVisiveis: 3,
+
+
+            categories: [{
+                name: 'Engenharia Civil',
+                courses: [{
+                    title: 'Fiscalização de Obras - FO',
+                    provider: '32.900',
+                    rating: '4.8',
+                    img: './assets/img/gallery/2.jpeg'
+                }, {
+                    title: 'Medições e Orçamentos - MO',
+                    provider: '102.900',
+                    rating: '4.9',
+                    img: './assets/img/gallery/1.jpeg'
+                }, {
+                    title: 'Ganttproject',
+                    provider: '33.000',
+                    rating: '4.9',
+                    img: './assets/img/gallery/012.jpeg'
+                }]
+            }, {
+                name: 'Arquitetura',
+                courses: [{
+                    title: 'Revit + Lumion',
+                    provider: '50.000',
+                    rating: '4.8',
+                    img: './assets/img/gallery/111.jpeg'
+                }, {
+                    title: 'AutoCAD 2D',
+                    provider: '50.900',
+                    rating: '4.7',
+                    img: './assets/img/gallery/AutoCAD-Civil-2D.png'
+                }, {
+                    title: 'Dimensionamento de Piscinas',
+                    provider: '50.900',
+                    rating: '4.8',
+                    img: './17.jpeg'
+                }]
+            }, {
+                name: 'Dimensionamento',
+                courses: [{
+                    title: 'SIG - Produção de mapas com QGIS',
+                    provider: '15.000',
+                    rating: '4.8',
+                    img: './assets/img/gallery/008.jpeg'
+                }, {
+                    title: 'Topografia',
+                    provider: '45.000',
+                    rating: '4.9',
+                    img: './assets/img/gallery/8.jpeg'
+                }, {
+                    title: 'Dimensionamento de Estruturas metálicas com Softwate',
+                    provider: '40.000',
+                    rating: '4.7',
+                    img: './assets/img/gallery/011.jpeg'
+                }]
+            }],
+
+
+            partnerLogos: [
+                './assets/img/logo1.png',
+                './assets/img/logo2.png',
+                './assets/img/logo3.png',
+                './assets/img/logo4.png',
+                './assets/img/logo5.png'
+            ]
 
         };
     },
@@ -144,8 +207,40 @@ export default {
             };
         }
     },
+    mounted() {
+        this.checkMobile();
+        window.addEventListener('resize', this.checkMobile);
+        this.initSwiper();
+    },
     methods: {
-
+        checkMobile() {
+            this.isMobile = window.innerWidth < 768;
+        },
+        initSwiper() {
+            this.$nextTick(() => {
+                new Swiper(".mySwiper", {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    loop: true,
+                    breakpoints: {
+                        768: {
+                            slidesPerView: 3,
+                            spaceBetween: 30,
+                            // No desktop, só permite deslizar se houver mais de 3
+                            allowTouchMove: this.categories.length > 3
+                        }
+                    },
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                    pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true,
+                    }
+                });
+            });
+        },
         toggle: function(index) {
             // Se clicar no que já está aberto, fecha tudo (-1), senão abre o novo índice
             this.activeIndex = this.activeIndex === index ? -1 : index;

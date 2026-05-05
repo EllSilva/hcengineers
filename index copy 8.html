@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Vue + Swiper Final</title>
+
+    <!-- Dependências -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+
+    <style>
+        body {
+            background-color: #f4f7f6;
+            padding: 50px 0;
+        }
+        /* Container do Swiper */
+        
+        .swiper {
+            width: 100%;
+            padding: 50px 0 !important;
+            position: relative;
+        }
+        
+        .card-custom {
+            background: white;
+            border-radius: 15px;
+            padding: 35px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            border: 1px solid #eee;
+            transition: transform 0.3s ease;
+        }
+        /* Estilização Premium dos Botões */
+        
+        .swiper-button-next,
+        .swiper-button-prev {
+            width: 50px;
+            height: 50px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            color: #007bff !important;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: #007bff;
+            color: #ffffff !important;
+        }
+        
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        /* Ajuste de posição para mobile para não sobrepor o conteúdo */
+        
+        @media (max-width: 768px) {
+            .swiper-button-next {
+                right: 5px;
+            }
+            .swiper-button-prev {
+                left: 5px;
+            }
+            .swiper-button-next,
+            .swiper-button-prev {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2 class="font-weight-bold">Meu Slider Responsivo</h2>
+            </div>
+        </div>
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for="item in itens" :key="item.id">
+                    <div class="card-custom">
+                        <i :class="[item.icon, 'fa-3x mb-3 text-primary']"></i>
+                        <h5 class="font-weight-bold">{{ item.titulo }}</h5>
+                        <p class="text-muted mb-0">{{ item.texto }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTÕES: Sempre aparecem no Mobile (isMobile) OU se Itens > 3 no Desktop -->
+            <div class="swiper-button-prev" v-show="isMobile || itens.length > 3"></div>
+            <div class="swiper-button-next" v-show="isMobile || itens.length > 3"></div>
+
+            <!-- Paginação (Bolinhas) -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isMobile: false,
+                // Lista de itens - tente deixar apenas 3 para testar o comportamento no desktop
+                itens: [{
+                    id: 1,
+                    titulo: 'Performance',
+                    texto: 'Rápido e otimizado.',
+                    icon: 'fas fa-tachometer-alt'
+                }, {
+                    id: 2,
+                    titulo: 'Segurança',
+                    texto: 'Dados protegidos.',
+                    icon: 'fas fa-shield-alt'
+                }, {
+                    id: 3,
+                    titulo: 'Cloud',
+                    texto: 'Sempre disponível.',
+                    icon: 'fas fa-cloud-upload-alt'
+                }, {
+                    id: 4,
+                    titulo: 'Suporte',
+                    texto: 'Ajuda 24 horas.',
+                    icon: 'fas fa-headset'
+                }]
+            },
+            mounted() {
+                this.handleResize();
+                window.addEventListener('resize', this.handleResize);
+                this.initSwiper();
+            },
+            methods: {
+                handleResize() {
+                    this.isMobile = window.innerWidth < 768;
+                },
+                initSwiper() {
+                    this.$nextTick(() => {
+                        new Swiper(".mySwiper", {
+                            slidesPerView: 1,
+                            spaceBetween: 20,
+                            loop: true,
+                            // Observer garante que o Swiper "re-scaneie" os botões quando o v-show mudar
+                            observer: true,
+                            observeParents: true,
+
+                            breakpoints: {
+                                768: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 30,
+                                    // No desktop, se tiver 3 ou menos, desativa o arrasto manual
+                                    allowTouchMove: this.itens.length > 3,
+                                    loop: this.itens.length > 3
+                                }
+                            },
+                            navigation: {
+                                nextEl: ".swiper-button-next",
+                                prevEl: ".swiper-button-prev",
+                            },
+                            pagination: {
+                                el: ".swiper-pagination",
+                                clickable: true,
+                            }
+                        });
+                    });
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -31,8 +31,8 @@
                                 </p>
 
                                 <div class="btn-group">
-                                    <a href="#/cursos" class="btn_1">Ver Curso </a>
-                                    <a @click="abrirModal" class="btn_2">Inscreva-se Agora </a>
+                                    <a href="#/cursos" class="btn_1">Curso </a>
+                                    <a @click="abrirModal" class="btn_2">Inscreva-se </a>
                                 </div>
                             </div>
                         </div>
@@ -50,56 +50,14 @@
     </section>
 
 
-    <!-- feature_part start-->
-    <section class="feature_part">
-        <div class="container ">
-            <div class="row  " style=" display: flex; justify-content: center;  align-items: center">
-
-                <div class="col-sm-6 col-xl-3">
-                    <div class="single_feature">
-                        <div class="single_feature_part">
-                            <span class="single_feature_icon"><i class="ti-layers"></i></span>
-                            <h4>Tecnologia</h4>
-                            <p>Aprendizado com as ferramentas mais modernas do mercado</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-4">
-                    <div class="single_feature">
-                        <div class="single_feature_part">
-                            <span class="single_feature_icon"><i class="bi bi-person-workspace"></i></span>
-                            <h4>Mentor</h4>
-                            <p>Receba apoio de especialistas, tire dúvidas e alcance seus objetivos.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="single_feature">
-                        <div class="single_feature_part single_feature_part_2">
-                            <span class="single_service_icon style_icon"><i class="bi bi-mortarboard-fill"></i></span>
-                            <h4>Certificação</h4>
-                            <p>Ao concluir o curso, receba um diploma certificado pelo INEFOP</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- upcoming_event part start-->
-
 
     <!-- learning part start Formação progressida-->
     <section class="learning_part">
-        <div class="container">
-            <div class="row align-items-sm-center align-items-lg-stretch">
-                <div class="col-md-7 col-lg-7">
+        <div class="container ">
+            <div class="row align-items-sm-center align-items-lg-stretch reverse">
 
-                    <img src="./assets/img/sobre.jpg" alt="" srcset="" style=" object-fit: cover;
-                            border-radius:56px 56px 0 0;">
 
-                </div>
-
-                <div class="col-md-5 col-lg-5 pt-5">
+                <div class="col-md-6 col-lg-6 pt-2">
                     <div class="learning_member_text">
                         <h5>Sobre nós</h5>
                         <h2>ACADEMIA HCENGINEERS</h2>
@@ -113,6 +71,11 @@
                         <a href="#/sobre" class="btn_1">Leia mais</a>
                     </div>
                 </div>
+
+                <div class="col-md-6 col-lg-6 esconder_mobale pt-4">
+                    <img src="./assets/img/sobre.jpg" alt="" srcset="">
+                </div>
+
             </div>
         </div>
     </section>
@@ -217,86 +180,165 @@
 
 
 
-    <!--::review_part start::-->
-    <section class="special_cource padding_top fundo_destaque">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-5">
-                    <div class="section_tittle text-center">
-                        <p>Cursos +Popular</p>
-                        <h2>Cursos em Destaque</h2>
-                    </div>
-                </div>
-            </div>
-            <div class=" ">
-                <div class="row g-4">
 
+    <div class="container py-5">
+        <!-- Seção: Mais populares por categoria -->
+        <h2 class="h5 font-weight-bold mb-4">Mais populares por categoria</h2>
 
-                    <div v-for="curso in cursos" :key="curso.id" class="col-12 col-sm-6 col-lg-3 p-2">
-                        <div class="card shadow-sm h-100">
-                            <img :src="curso.imagem" class="card-img-top" :alt="curso.titulo">
+        <!-- Slider Main Container -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
 
-                            <div class="card-body d-flex flex-column">
-                                <div class="mb-3">
-                                    <span class="badge badge-category bg-light text-dark me-1">{{ curso.categoria }}</span>
-                                </div>
+                <!-- Slides usando v-for -->
+                <div class="swiper-slide" v-for="cat in categories" :key="cat.id">
+                    <div class="card-custom">
 
-                                <h5 class="card-title fw-bold mb-2" style="font-size: 1.1rem;">{{ curso.titulo }}</h5>
+                        <!-- Itens do Slider -->
+                        <div class="category-container rounded-lg">
+                            <h3 class="h6 font-weight-bold mb-3">
+                                {{ cat.name }} <span class="text-primary ml-1">→</span>
+                            </h3>
 
-                                <div class="mb-2">
-                                    <small class="text-warning">★★★★★</small>
-                                    <small class="text-muted ms-1" style="font-size: 0.75rem;">(1 avaliações)</small>
-                                </div>
-
-                                <p class="card-text description-truncate mb-4">
-                                    {{ curso.descricao }}
-                                </p>
-
-                                <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                                    <span class="price-text">{{ curso.preco }}Kz</span>
-                                    <a href="#" class="btn-view">Ver Curso &rarr;</a>
+                            <div class="course-card" v-for="course in cat.courses" :key="course.title">
+                                <img :src="course.img" class="course-img" alt="Logo">
+                                <div class="course-info">
+                                    <small class="text-muted font-weight-bold text-uppercase" style="font-size: 10px;">{{ course.provider }}</small>
+                                    <div class="course-name">{{ course.title }}</div>
+                                    <div class="text-muted small">Certificado profissional • ★ {{ course.rating }}</div>
                                 </div>
                             </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <template v-if="isMobile || categories.length > 3">
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </template>
+            <!-- Navegação e Paginação -->
+
+            <div class="swiper-pagination"></div>
+        </div>
+
+
+
+
+        <!-- Seção: Banners (Plus e Business) -->
+        <div class="row my-5">
+            <div class="col-md-6 mb-4">
+                <div class="banner banner-plus rounded-lg">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="pr-3">
+                                <p class="mb-3">Aprenda competências técnicas valorizadas pelas empresas e prepare-se para responder às exigências reais do setor da construção e engenharia em Angola.</p>
+                                <a href="#" class="btn btn-outline-light btn-sm font-weight-bold border-0 p-0">Quero preparar-me para o mercado →</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="./assets/img/arquitetura.png">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="banner banner-business rounded-lg">
+
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="pr-3">
+                                <h4 class="font-weight-bold">Certificação <span class="font-weight-normal h6">Profissional </span></h4>
+                                <p class="mb-3">Conclua a sua formação com certificação reconhecida e validada pelo INEFOP, reforçando a sua credibilidade profissional.</p>
+                                <a href="#/contato" class="btn btn-outline-light btn-sm font-weight-bold border-0 p-0">Garantir a minha inscrição → </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="./assets/img/Inefop.png" alt="Coursera Plus" style="width: 90%;">
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!--::blog_part end::-->
 
-    <section class="plano-neg">
+        <!-- Seção: Parceiros -->
+        <div class="text-center mb-5">
+            <h2 class="h5 font-weight-bold mb-4">Formação ministrada em empresas de referência.</h2>
+            <p class="text-muted small mb-4">Ao longo da nossa trajetória, já ministrámos formações técnicas para diversas empresas, contribuindo para o desenvolvimento de competências profissionais e para a valorização das suas equipas.</p>
+            <div class="d-flex flex-wrap justify-content-center align-items-center" style="gap: 2rem;">
+                <img v-for="logo in partnerLogos" :src="logo" class="grayscale" alt="Partner">
+            </div>
+        </div>
+
+        <!-- Seção: Ações Finais -->
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="action-card">
+                    <h5>Iniciar uma nova carreira</h5>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="action-card">
+                    <h5>Experimente Novos Cursos</h5>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="action-card">
+                    <h5>Obter um Certificado</h5>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <section class=" ">
 
         <div class="hero-card">
             <!-- Texto -->
-            <div class="content-side">
-                <div class="badge-pill">Planos de Formação</div>
+            <div class="content-side ">
 
-                <h1 class="hero-title">
-                    Sequências de cursos preparadas para você se<br>
-                    <span>capacitar.</span>
-                </h1>
+                <div class=" container planos_form">
 
-                <p class="hero-desc">
-                    Construa sua carreira com o passo a passo dos Planos de Formação que melhor se adaptam aos seus objetivos, desenvolva competências sólidas e conquiste o seu espaço no mercado de trabalho.
-                </p>
+                    <div class="badge-pill">Planos de Formação</div>
 
-                <div class="row">
-                    <div class="col-md-6 feature-item d-flex">
-                        <div class="feature-icon"><i class="bi bi-patch-check"></i></div>
-                        <div class="feature-text">
-                            <h6>Resultados práticos</h6>
-                            <p>Desenvolva habilidades práticas e esteja preparado para desafios reais.</p>
+                    <h1 class="hero-title">
+                        Sequências de cursos preparadas para você se
+                        <span>capacitar.</span>
+                    </h1>
+
+                    <p class="hero-desc">
+                        Construa sua carreira com o passo a passo dos Planos de Formação que melhor se adaptam aos seus objetivos, desenvolva competências sólidas e conquiste o seu espaço no mercado de trabalho.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-md-6 feature-item d-flex">
+                            <div class="feature-icon"><i class="bi bi-patch-check"></i></div>
+                            <div class="feature-text">
+                                <h6>Resultados práticos</h6>
+                                <p>Desenvolva habilidades práticas e esteja preparado para desafios reais.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature-item d-flex">
+                            <div class="feature-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                            <div class="feature-text">
+                                <h6>Formação progressiva</h6>
+                                <p>Aprenda de forma organizada e evolua continuamente nas suas competências.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6 feature-item d-flex">
-                        <div class="feature-icon"><i class="bi bi-graph-up-arrow"></i></div>
-                        <div class="feature-text">
-                            <h6>Formação progressiva</h6>
-                            <p>Aprenda de forma organizada e evolua continuamente nas suas competências.</p>
-                        </div>
-                    </div>
+
                 </div>
+
 
             </div>
 

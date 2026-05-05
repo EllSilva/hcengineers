@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-item Slider Vue 2</title>
-    <!-- Vue.js 2 CDN -->
+    <title>Slider Responsivo Vue 2</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 
     <style>
@@ -25,26 +24,29 @@
             min-height: 100vh;
         }
         
-        .slider-window {
+        .slider-container {
             position: relative;
-            width: 95%;
+            width: 90%;
             max-width: 1200px;
             margin: auto;
+        }
+        
+        .slider-window {
+            width: 100%;
             overflow: hidden;
-            /* Esconde os slides que saem da área */
+            padding: 20px 0;
         }
         
         .slider-track {
             display: flex;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             gap: 20px;
-            /* Espaço entre os cards */
-            padding: 20px 0;
         }
+        /* RESPONSIVIDADE DOS CARDS */
         
         .slide-card {
-            /* Cálculo para mostrar 3 itens: (100% / 3) - compensação do gap */
             flex: 0 0 calc(33.333% - 14px);
+            /* Desktop: 3 itens */
             height: 400px;
             background-size: cover;
             background-position: center;
@@ -52,57 +54,76 @@
             display: flex;
             align-items: flex-end;
             position: relative;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 1024px) {
+            .slide-card {
+                flex: 0 0 calc(50% - 10px);
+            }
+            /* Tablet: 2 itens */
+        }
+        
+        @media (max-width: 600px) {
+            .slide-card {
+                flex: 0 0 100%;
+            }
+            /* Mobile: 1 item */
         }
         
         .card-info {
             background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
             width: 100%;
             padding: 20px;
-            transform: translateY(0);
-            transition: 0.3s;
+            border-radius: 0 0 15px 15px;
         }
-        
-        .slide-card:hover .card-info {
-            padding-bottom: 40px;
-        }
-        /* Controles */
+        /* BOTÕES VISÍVEIS */
         
         .nav-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 1);
-            color: black;
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             cursor: pointer;
-            z-index: 10;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
         }
         
-        .prev {
-            left: 10px;
-        }
-        
-        .next {
-            right: 10px;
+        .nav-btn:hover:not(:disabled) {
+            background: #fff;
+            scale: 1.1;
         }
         
         .nav-btn:disabled {
-            opacity: 0.3;
+            opacity: 0.2;
             cursor: not-allowed;
         }
-        /* Responsividade para Mobile (Mostrar 1 slide) */
+        /* Posicionamento dos botões para fora do slider em telas grandes, dentro em pequenas */
+        
+        .prev {
+            left: -25px;
+        }
+        
+        .next {
+            right: -25px;
+        }
         
         @media (max-width: 768px) {
-            .slide-card {
-                flex: 0 0 100%;
+            .prev {
+                left: 10px;
+            }
+            .next {
+                right: 10px;
             }
         }
     </style>
@@ -111,17 +132,19 @@
 <body>
 
     <div id="app">
-        <div class="slider-window">
+        <div class="slider-container">
             <!-- Botões -->
             <button class="nav-btn prev" @click="prev" :disabled="currentIdx === 0">❮</button>
-            <button class="nav-btn next" @click="next" :disabled="currentIdx >= slides.length - 3">❯</button>
+            <button class="nav-btn next" @click="next" :disabled="currentIdx >= maxIdx">❯</button>
 
-            <!-- Trilho dos Slides -->
-            <div class="slider-track" :style="{ transform: `translateX(-${currentIdx * (100 / 3 + 0.5)}%)` }">
-                <div v-for="slide in slides" :key="slide.id" class="slide-card" :style="{ backgroundImage: 'url(' + slide.img + ')' }">
-                    <div class="card-info">
-                        <h3>{{ slide.title }}</h3>
-                        <p>{{ slide.category }}</p>
+            <div class="slider-window">
+                <!-- O cálculo do transform agora é baseado no itemWidth dinâmico -->
+                <div class="slider-track" :style="{ transform: `translateX(-${currentIdx * stepSize}%)` }">
+                    <div v-for="slide in slides" :key="slide.id" class="slide-card" :style="{ backgroundImage: 'url(' + slide.img + ')' }">
+                        <div class="card-info">
+                            <h3>{{ slide.title }}</h3>
+                            <p>{{ slide.category }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -133,6 +156,7 @@
             el: '#app',
             data: {
                 currentIdx: 0,
+                itemsVisible: 3,
                 slides: [{
                     id: 1,
                     title: 'Projeto Alpha',
@@ -165,18 +189,39 @@
                     img: 'https://picsum.photos/id/60/400/600'
                 }]
             },
+            computed: {
+                // Calcula quantos itens faltam para chegar ao fim
+                maxIdx() {
+                    return this.slides.length - this.itemsVisible;
+                },
+                // Calcula a porcentagem do passo baseada na largura da tela
+                stepSize() {
+                    return 100 / this.itemsVisible;
+                }
+            },
             methods: {
+                updateItemsVisible() {
+                    const width = window.innerWidth;
+                    if (width < 600) this.itemsVisible = 1;
+                    else if (width < 1024) this.itemsVisible = 2;
+                    else this.itemsVisible = 3;
+
+                    // Reseta o índice se ele estourar o novo limite ao redimensionar
+                    if (this.currentIdx > this.maxIdx) this.currentIdx = this.maxIdx;
+                },
                 next() {
-                    // Impede de avançar além do último grupo de 3
-                    if (this.currentIdx < this.slides.length - 3) {
-                        this.currentIdx++;
-                    }
+                    if (this.currentIdx < this.maxIdx) this.currentIdx++;
                 },
                 prev() {
-                    if (this.currentIdx > 0) {
-                        this.currentIdx--;
-                    }
+                    if (this.currentIdx > 0) this.currentIdx--;
                 }
+            },
+            mounted() {
+                this.updateItemsVisible();
+                window.addEventListener('resize', this.updateItemsVisible);
+            },
+            beforeDestroy() {
+                window.removeEventListener('resize', this.updateItemsVisible);
             }
         });
     </script>

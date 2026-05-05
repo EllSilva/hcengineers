@@ -189,7 +189,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #0c2e60;
+    color: hsl(216, 100%, 84%);
     font-family: "Poppins", sans-serif;
 }
 
@@ -3827,13 +3827,19 @@ ul {
 .learning_part {
     position: relative;
     z-index: 99;
-    padding: 150px 0px 110px;
+    padding: 50px 0px 110px;
+    margin-bottom: 110px;
+    background-color: #ffffff;
 }
 
 @media (max-width: 576px) {
     /* line 2, E:/172 Etrain Education/172_Etrain_Education_html/sass/_learning.scss */
     .learning_part {
-        padding: 70px 0px;
+        padding: 70px 10px;
+        margin-bottom: 10px;
+    }
+    .esconder_mobale {
+        display: none
     }
 }
 
