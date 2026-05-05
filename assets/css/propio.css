@@ -348,7 +348,7 @@
                                 background: linear-gradient(to top, var(--bg-dark) 0%, transparent 100%);
                             }
                             .content-container_princ {
-                                padding: 40px 5%;
+                                padding: 40px 0%;
                                 /*  
                                    text-align: center;
                                 align-items: center;
